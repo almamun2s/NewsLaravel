@@ -5,7 +5,7 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ asset('backend/assets/images/users/user-1.jpg') }}" alt="user-img" title="Mat Helme"
+            <img src="{{ Auth::user()->getImg() }}" alt="user-img" title="Mat Helme"
                 class="rounded-circle avatar-md">
             <div class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block">{{ Auth::user()->fname }} {{ Auth::user()->lname }} </div>
             <p class="text-muted" style="text-transform: capitalize;">{{ Auth::user()->role }} </p>

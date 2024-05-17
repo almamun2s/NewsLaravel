@@ -26,6 +26,9 @@
     <!-- Head js -->
     <script src="{{ asset('backend/assets/js/head.js') }}"></script>
 
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+
 </head>
 
 <!-- body start -->

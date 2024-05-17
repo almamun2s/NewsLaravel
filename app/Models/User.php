@@ -43,4 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Showing profile picture
+     */
+    public function getImg()
+    {
+        if ($this->photo != null) {
+            return url('uploads/admin_images/' . $this->photo);
+        } else {
+            return url('uploads/no_profile_pic.png');
+        }
+    }
 }

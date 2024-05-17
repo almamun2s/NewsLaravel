@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,8 @@ class AdminController extends Controller
 
     /**
      * Logging out an Admin
+     *
+     * @param Request $request
      */
     public function admin_logout(Request $request)
     {
@@ -27,5 +30,64 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    /**
+     * Showing Admin Profile
+     */
+    public function admin_profile()
+    {
+        return view('admin.admin_profile');
+    }
+
+    /**
+     * Updating admin profile information
+     *
+     * @param Request $request
+     */
+    public function store(Request $request)
+    {
+        $id = Auth::user()->id;
+        $data = User::find($id);
+
+        $request->validate([
+            'fname' => 'required|min:3',
+            'lname' => 'required|min:3',
+            'email' => 'required|email',
+            'phone' => 'required',
+        ], [
+            'fname.required' => 'First name can not be empty',
+            'fname.min' => 'First name should be at least 3 charactors',
+
+            'lname.required' => 'Last name can not be empty',
+            'lname.min' => 'Last name should be at least 3 charactors',
+
+            'email.required' => 'Please provide an email',
+            'email.email' => 'Email is invalid',
+
+            'phone.required' => 'Phone number can not be empty',
+        ]);
+
+        $data->fname = $request->fname;
+        $data->lname = $request->lname;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+
+        if ($request->file('photo')) {
+            if ($data->photo != null ) {
+                unlink(public_path('uploads/admin_images/' . $data->photo));
+            }
+
+            $file = $request->file('photo');
+
+            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/admin_images'), $fileName);
+
+            $data->photo = $fileName;
+        }
+
+        $data->save();
+
+        return redirect()->back();
     }
 }
