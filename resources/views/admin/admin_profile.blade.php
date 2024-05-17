@@ -28,11 +28,11 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="card text-center">
                     <div class="card-body">
-                        <img src="{{ Auth::user()->getImg() }}" class="rounded-circle avatar-lg img-thumbnail"
+                        <img src="{{ auth()->user()->getImg() }}" class="rounded-circle avatar-lg img-thumbnail"
                             alt="profile-image">
 
-                        <h4 class="mb-0">{{ Auth::user()->fname }} {{ Auth::user()->lname }} </h4>
-                        <p class="text-muted">{{ Auth::user()->username }} </p>
+                        <h4 class="mb-0">{{ auth()->user()->fname }} {{ auth()->user()->lname }} </h4>
+                        <p class="text-muted">{{ auth()->user()->username }} </p>
 
                         <button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light">Follow</button>
                         <button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light">Message</button>
@@ -44,13 +44,13 @@
                                 an unknown printer took a galley of type.
                             </p>
                             <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span
-                                    class="ms-2">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</span></p>
+                                    class="ms-2">{{ auth()->user()->fname }} {{ auth()->user()->lname }}</span></p>
 
                             <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span
-                                    class="ms-2">{{ Auth::user()->phone }}</span></p>
+                                    class="ms-2">{{ auth()->user()->phone }}</span></p>
 
                             <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                    class="ms-2">{{ Auth::user()->email }}</span></p>
+                                    class="ms-2">{{ auth()->user()->email }}</span></p>
                         </div>
                     </div>
                 </div> <!-- end card -->
@@ -69,7 +69,7 @@
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">First Name</label>
                                             <input type="text" name="fname" class="form-control"
-                                                placeholder="Enter first name" value="{{ Auth::user()->fname }}">
+                                                placeholder="Enter first name" value="{{ auth()->user()->fname }}">
                                             @error('fname')
                                                 <p class="text-danger mt-2">{{ $message }} </p>
                                             @enderror
@@ -79,7 +79,7 @@
                                         <div class="mb-3">
                                             <label for="lastname" class="form-label">Last Name</label>
                                             <input type="text" name="lname" class="form-control"
-                                                placeholder="Enter last name" value="{{ Auth::user()->lname }}">
+                                                placeholder="Enter last name" value="{{ auth()->user()->lname }}">
                                             @error('lname')
                                                 <p class="text-danger mt-2">{{ $message }} </p>
                                             @enderror
@@ -89,7 +89,7 @@
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control"
-                                                placeholder="Enter your email" value="{{ Auth::user()->email }}">
+                                                placeholder="Enter your email" value="{{ auth()->user()->email }}">
                                             @error('email')
                                                 <p class="text-danger mt-2">{{ $message }} </p>
                                             @enderror
@@ -99,7 +99,7 @@
                                         <div class="mb-3">
                                             <label for="phone" class="form-label">Mobile</label>
                                             <input type="number" name="phone" class="form-control"
-                                                placeholder="Enter your Phone" value="{{ Auth::user()->phone }}" >
+                                                placeholder="Enter your Phone" value="{{ auth()->user()->phone }}">
                                             @error('phone')
                                                 <p class="text-danger mt-2">{{ $message }} </p>
                                             @enderror
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <img src="{{ Auth::user()->getImg() }}"
+                                            <img src="{{ auth()->user()->getImg() }}"
                                                 class="rounded-circle avatar-lg img-thumbnail" alt="profile-image"
                                                 id="showImage">
                                         </div>
@@ -130,6 +130,70 @@
                                     </div> <!-- end col -->
                                 </div> <!-- end row -->
 
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
+                                            class="mdi mdi-content-save"></i> Save</button>
+                                </div>
+                            </form>
+                            <!-- end settings content-->
+
+                        </div> <!-- end tab-content -->
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <form action="{{ route('admin.change_pwd') }}" method="POST">
+                                @csrf
+                                <h5 class="mb-4 text-uppercase"><i class="mdi mdi-key me-1"></i> Change
+                                    Password </h5>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="password_old" class="form-label">Current Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <input type="text" class="form-control" name="password_old"
+                                                    placeholder="Enter Current Password">
+                                                <div class="input-group-text show-password" data-password="true">
+                                                    <span class="password-eye"></span>
+                                                </div>
+                                            </div>
+                                            @error('password_old')
+                                                <p class="text-danger mt-2">{{ $message }} </p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">New Password</label>
+                                            {{-- <input type="password" name="password" class="form-control"
+                                                placeholder=""> --}}
+                                            <div class="input-group input-group-merge">
+                                                <input type="text" class="form-control" name="password"
+                                                    placeholder="Enter New Password">
+                                                <div class="input-group-text show-password" data-password="true">
+                                                    <span class="password-eye"></span>
+                                                </div>
+                                            </div> @error('password')
+                                                <p class="text-danger mt-2">{{ $message }} </p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="password_confirmation" class="form-label">Retype Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <input type="text" class="form-control" name="password_confirmation"
+                                                    placeholder="Enter New Password again">
+                                                <div class="input-group-text show-password" data-password="true">
+                                                    <span class="password-eye"></span>
+                                                </div>
+                                            </div>
+                                            @error('password_confirmation')
+                                                <p class="text-danger mt-2">{{ $message }} </p>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
                                             class="mdi mdi-content-save"></i> Save</button>

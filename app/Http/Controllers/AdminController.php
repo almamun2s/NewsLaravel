@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -74,7 +75,7 @@ class AdminController extends Controller
         $data->phone = $request->phone;
 
         if ($request->file('photo')) {
-            if ($data->photo != null ) {
+            if ($data->photo != null) {
                 unlink(public_path('uploads/admin_images/' . $data->photo));
             }
 
@@ -88,6 +89,45 @@ class AdminController extends Controller
 
         $data->save();
 
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Admin Data updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+
+    /**
+     * Change admin password
+     *
+     * @param Request $request
+     */
+    public function change_pwd(Request $request)
+    {
+        $request->validate([
+            'password_old' =>  [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!Hash::check($value, Auth::user()->password)) {
+                        $fail('The password you entered was incorrect');
+                    }
+                }
+            ],
+            'password' => 'required|min:8|confirmed',
+        ],[
+            'password_old.required' => 'Enter your current password here',
+            'password.required' => 'Enter a new password here',
+            'password.min' => 'Password must at least 8 charactors',
+        ]);
+
+        User::find(Auth::user()->id)->update([
+            'password'  => $request->password // Password will be hash automically 
+        ]);
+
+        $notification = array(
+            'message' => 'Password changed Successfully',
+            'alert-type' => 'info'
+        );
+        return redirect()->back()->with($notification);
     }
 }

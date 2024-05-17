@@ -5,10 +5,10 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ Auth::user()->getImg() }}" alt="user-img" title="Mat Helme"
+            <img src="{{ auth()->user()->getImg() }}" alt="user-img" title="Mat Helme"
                 class="rounded-circle avatar-md">
-            <div class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block">{{ Auth::user()->fname }} {{ Auth::user()->lname }} </div>
-            <p class="text-muted" style="text-transform: capitalize;">{{ Auth::user()->role }} </p>
+            <div class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block">{{ auth()->user()->fname }} {{ auth()->user()->lname }} </div>
+            <p class="text-muted" style="text-transform: capitalize;">{{ auth()->user()->role }} </p>
         </div>
 
         <!--- Sidemenu -->

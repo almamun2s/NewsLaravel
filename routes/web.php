@@ -40,4 +40,5 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/admin/logout', [AdminController::class, 'admin_logout'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
     Route::post('/admin/profile', [AdminController::class, 'store'])->name('admin.profile.store');
+    Route::post('/admin/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
 });
