@@ -31,7 +31,7 @@
 <!-- body start -->
 
 <body data-layout-mode="default" data-theme="light" data-topbar-color="dark" data-menu-position="fixed"
-    data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='false'>
+    data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='true'>
 
     <!-- Begin page -->
     <div id="wrapper">
