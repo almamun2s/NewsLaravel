@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
+    <script src="{{ asset('js/jquery.min.js') }}" id="newsflash-jquery-js"></script>
 
 
 
@@ -89,7 +90,6 @@
 
     <script async="" src="{{ asset('frontend/assets/js/widgets.js') }}" charset="utf-8"></script>
     <script src="{{ asset('frontend/assets/js/index.js') }}" id="contact-form-7-js"></script>
-    <script src="{{ asset('js/jquery.min.js') }}" id="newsflash-jquery-js"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}" id="newsflash-bootstrap-js"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}" id="newsflash-bootstrapbundle-js"></script>
     <script src="{{ asset('frontend/assets/js/stellarnav.min.js') }}" id="newsflash-stellarnav-js"></script>
