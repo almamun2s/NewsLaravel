@@ -13,10 +13,13 @@
                     <div class="contact-wrpp">
                         <h4 class="contactAddess-title text-center">Login </h4>
                         <div role="form" class="wpcf7" id="wpcf7-f437-o1" lang="en-US" dir="ltr">
-                            <div class="screen-reader-response">
-                                <p role="status" aria-live="polite" aria-atomic="true"></p>
-                                <ul></ul>
-                            </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                        <p>{{ $error }}</p>
+                                    @endforeach
+                                </div>
+                            @endif
 
                             <form action="{{ route('login') }}" method="post" class="wpcf7-form init">
                                 @csrf

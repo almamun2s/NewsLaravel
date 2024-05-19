@@ -25,6 +25,7 @@
                             <li> <a href="{{ route('register') }}"> <b>Register</b> </a> </li>
                         @endguest
                         @auth
+                            <li> <a href="{{ route('logout') }}"> <b>Logout</b> </a> </li>
                             <li> <a href="{{ route('dashboard') }}"> <b>Dashboard</b> </a> </li>
                         @endauth
                     </ul>

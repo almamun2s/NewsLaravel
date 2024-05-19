@@ -22,7 +22,7 @@ class AdminController extends Controller
      *
      * @param Request $request
      */
-    public function admin_logout(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
 
@@ -93,7 +93,7 @@ class AdminController extends Controller
             'message' => 'Admin Data updated Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification)->with("status", "Profile Updated Successfully");
     }
 
 
@@ -105,7 +105,7 @@ class AdminController extends Controller
     public function change_pwd(Request $request)
     {
         $request->validate([
-            'password_old' =>  [
+            'password_old' => [
                 'required',
                 function ($attribute, $value, $fail) {
                     if (!Hash::check($value, Auth::user()->password)) {
@@ -114,20 +114,20 @@ class AdminController extends Controller
                 }
             ],
             'password' => 'required|min:8|confirmed',
-        ],[
+        ], [
             'password_old.required' => 'Enter your current password here',
             'password.required' => 'Enter a new password here',
             'password.min' => 'Password must at least 8 charactors',
         ]);
 
         User::find(Auth::user()->id)->update([
-            'password'  => $request->password // Password will be hash automically 
+            'password' => $request->password // Password will be hash automically 
         ]);
 
         $notification = array(
             'message' => 'Password changed Successfully',
             'alert-type' => 'info'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification)->with("status", "Password changed Successfully");
     }
 }
