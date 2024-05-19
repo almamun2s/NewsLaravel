@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,15 +36,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
 
 // Admin Routes 
-Route::middleware(['auth', 'role:admin'])->group(function(){
-    Route::get('/admin/dashboard', [AdminController::class, 'show_dashboard'])->name('admin.dashboard');
-    Route::get('/admin/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
-    Route::post('/admin/profile', [AdminController::class, 'store'])->name('admin.profile.store');
-    Route::post('/admin/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/dashboard', [AdminController::class, 'show_dashboard'])->name('admin.dashboard');
+    Route::get('/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
+    Route::post('/profile', [AdminController::class, 'store'])->name('admin.profile.store');
+    Route::post('/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
+
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index')->name('admin.category');
+        Route::post('/category', 'store')->name('admin.category');
+
+        Route::get('/category/{id}/edit', 'edit')->name('category.edit');
+        Route::post('/category/{id}/edit', 'update')->name('category.edit');
+
+        Route::get('/category/{id}/delete', 'destroy')->name('category.delete');
+    });
 });

@@ -5,9 +5,9 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ auth()->user()->getImg() }}" alt="user-img" title="Mat Helme"
-                class="rounded-circle avatar-md">
-            <div class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block">{{ auth()->user()->fname }} {{ auth()->user()->lname }} </div>
+            <img src="{{ auth()->user()->getImg() }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+            <div class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block">{{ auth()->user()->fname }}
+                {{ auth()->user()->lname }} </div>
             <p class="text-muted" style="text-transform: capitalize;">{{ auth()->user()->role }} </p>
         </div>
 
@@ -45,42 +45,15 @@
                 <li class="menu-title mt-2">Menu</li>
 
                 <li>
-                    <a href="#sidebarEcommerce" data-bs-toggle="collapse">
-                        <i class="mdi mdi-cart-outline"></i>
-                        <span> Ecommerce </span>
+                    <a href="#sidebarCategory" data-bs-toggle="collapse">
+                        <i class="mdi mdi-shape-outline"></i>
+                        <span class="material-icons-outlined">Category</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarEcommerce">
+                    <div class="collapse" id="sidebarCategory">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="ecommerce-dashboard.html">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-product-detail.html">Product Detail</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-product-edit.html">Add Product</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-customers.html">Customers</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-orders.html">Orders</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-order-detail.html">Order Detail</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-sellers.html">Sellers</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-cart.html">Shopping Cart</a>
-                            </li>
-                            <li>
-                                <a href="ecommerce-checkout.html">Checkout</a>
+                                <a href="{{ route('admin.category') }}">All Categories</a>
                             </li>
                         </ul>
                     </div>

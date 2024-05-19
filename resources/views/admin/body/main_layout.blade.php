@@ -17,6 +17,14 @@
     <link href="{{ asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
         type="text/css" />
 
+
+    <!-- third party css for DataTables -->
+    <link href="{{ asset('backend/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+
     <!-- Bootstrap css -->
     <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
@@ -26,6 +34,8 @@
     <!-- Toastr alert CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
+    <!-- Sweet alert js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Head js -->
     <script src="{{ asset('backend/assets/js/head.js') }}"></script>
     <!-- jQuery -->
@@ -103,6 +113,29 @@
 
     <!-- App js-->
     <script src="{{ asset('backend/assets/js/app.min.js') }}"></script>
+
+
+
+    <!-- third party js for DataTables -->
+    <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}">
+    </script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
+
+    <!-- Validation js -->
+    <script src="{{ asset('backend/assets/js/validation.min.js') }}"></script>
+    
+    <!-- Code js -->
+    <script src="{{ asset('backend/assets/js/code.js') }}"></script>
+
+
+
+
 
     <!-- Toastr js-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
