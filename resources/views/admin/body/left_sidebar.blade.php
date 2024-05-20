@@ -55,6 +55,9 @@
                             <li>
                                 <a href="{{ route('admin.category') }}">All Categories</a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.sub_category') }}">All SubCategories</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

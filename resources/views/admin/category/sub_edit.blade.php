@@ -1,6 +1,6 @@
 @extends('admin.body.main_layout')
 
-@section('title', 'Categories')
+@section('title', 'Edit SubCategories')
 
 @section('content')
     <div class="content">
@@ -19,7 +19,7 @@
                                 <li class="breadcrumb-item active">Datatables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Categories</h4>
+                        <h4 class="page-title">SubCategories</h4>
                     </div>
                 </div>
             </div>
@@ -30,21 +30,37 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Add Category</h4>
+                            <h4 class="header-title">Edit SubCategory</h4>
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="{{ route('admin.category') }}" id="myForm" method="post">
+                                    <form action="{{ route('sub_category.edit', $subcategory->id) }}" id="myForm"
+                                        method="post">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="simpleinput" class="form-label">Category Name</label>
-                                            <input type="text" name="category_name" autocomplete="off"
-                                                class="form-control">
-                                            @error('category_name')
+                                            <select class="form-select" name="category_id">
+                                                <option value="">-- Select Category --</option>
+                                                @foreach ($categories as $category)
+                                                    <option
+                                                        {{ $subcategory->category_id == $category->id ? 'selected' : '' }}
+                                                        value="{{ $category->id }}">{{ $category->name }} </option>
+                                                @endforeach
+                                            </select>
+                                            @error('category')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add Category
+                                        <div class="form-group mb-3">
+                                            <label for="simpleinput" class="form-label">Sub Category Name</label>
+                                            <input type="text" name="sub_category_name" autocomplete="off"
+                                                value="{{ $category->name }}" class="form-control">
+                                            @error('sub_category_name')
+                                                <span class="text-danger">{{ $message }} </span>
+                                            @enderror
+                                        </div>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Update Sub
+                                            Category
                                         </button>
                                     </form>
                                 </div> <!-- end col -->
@@ -58,43 +74,6 @@
             </div>
             <!-- end row -->
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>SL</th>
-                                        <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach ($categories as $key => $category)
-                                        <tr>
-                                            <td>{{ $key + 1 }} </td>
-                                            <td>{{ $category->name }} </td>
-                                            <td>{{ $category->slug }} </td>
-                                            <td>
-                                                <a href="{{ route('category.edit', $category->id) }}"
-                                                    class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                                <a href="{{ route('category.delete', $category->id) }}"
-                                                    class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                        </div> <!-- end card body-->
-                    </div> <!-- end card -->
-                </div><!-- end col-->
-            </div>
-            <!-- end row-->
         </div> <!-- container -->
     </div> <!-- content -->
 

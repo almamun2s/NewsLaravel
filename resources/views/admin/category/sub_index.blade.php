@@ -1,6 +1,6 @@
 @extends('admin.body.main_layout')
 
-@section('title', 'Categories')
+@section('title', 'Sub Categories')
 
 @section('content')
     <div class="content">
@@ -19,7 +19,7 @@
                                 <li class="breadcrumb-item active">Datatables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Categories</h4>
+                        <h4 class="page-title">Sub Categories</h4>
                     </div>
                 </div>
             </div>
@@ -30,21 +30,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Add Category</h4>
+                            <h4 class="header-title">Add Sub Category</h4>
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="{{ route('admin.category') }}" id="myForm" method="post">
+                                    <form action="{{ route('admin.sub_category') }}" id="myForm" method="post">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="simpleinput" class="form-label">Category Name</label>
-                                            <input type="text" name="category_name" autocomplete="off"
-                                                class="form-control">
-                                            @error('category_name')
+                                            <select class="form-select" name="category_id">
+                                                <option value="">-- Select Category --</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }} </option>
+                                                @endforeach
+                                            </select>
+                                            @error('category')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add Category
+                                        <div class="form-group mb-3">
+                                            <label for="simpleinput" class="form-label">Sub Category Name</label>
+                                            <input type="text" name="sub_category_name" autocomplete="off"
+                                                class="form-control">
+                                            @error('sub_category_name')
+                                                <span class="text-danger">{{ $message }} </span>
+                                            @enderror
+                                        </div>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add Sub
+                                            Category
                                         </button>
                                     </form>
                                 </div> <!-- end col -->
@@ -67,6 +80,7 @@
                                 <thead>
                                     <tr>
                                         <th>SL</th>
+                                        <th>Category</th>
                                         <th>Name</th>
                                         <th>Slug</th>
                                         <th>Action</th>
@@ -74,16 +88,18 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($categories as $key => $category)
+                                    @foreach ($subcategories as $key => $subcategory)
                                         <tr>
                                             <td>{{ $key + 1 }} </td>
-                                            <td>{{ $category->name }} </td>
-                                            <td>{{ $category->slug }} </td>
+                                            <td>{{ $subcategory->category->name }} </td>
+                                            <td>{{ $subcategory->name }} </td>
+                                            <td>{{ $subcategory->slug }} </td>
                                             <td>
-                                                <a href="{{ route('category.edit', $category->id) }}"
+                                                <a href="{{ route('sub_category.edit', $subcategory->id) }}"
                                                     class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                                <a href="{{ route('category.delete', $category->id) }}"
-                                                    class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                                <a href="{{ route('sub_category.delete', $subcategory->id) }}"
+                                                    class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                    id="delete">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

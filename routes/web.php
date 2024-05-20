@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::post('/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
 
     Route::controller(CategoryController::class)->group(function () {
+        // Category Routes
         Route::get('/category', 'index')->name('admin.category');
         Route::post('/category', 'store')->name('admin.category');
 
@@ -56,5 +57,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/category/{id}/edit', 'update')->name('category.edit');
 
         Route::get('/category/{id}/delete', 'destroy')->name('category.delete');
+        
+        // Sub Category Routes
+        Route::get('/subcategory', 'sub_index')->name('admin.sub_category');
+        Route::post('/subcategory', 'sub_store')->name('admin.sub_category');
+
+        Route::get('/subcategory/{id}/edit', 'sub_edit')->name('sub_category.edit');
+        Route::post('/subcategory/{id}/edit', 'sub_update')->name('sub_category.edit');
+
+        Route::get('/subcategory/{id}/delete', 'sub_destroy')->name('sub_category.delete');
     });
 });
