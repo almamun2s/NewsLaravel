@@ -43,12 +43,15 @@ require __DIR__ . '/auth.php';
 
 // Admin Routes 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/', function(){
+        return redirect()->route('admin.dashboard');
+    });
     Route::get('/dashboard', [AdminController::class, 'show_dashboard'])->name('admin.dashboard');
     Route::get('/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
     Route::post('/profile', [AdminController::class, 'store'])->name('admin.profile.store');
     Route::post('/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
 
-    Route::controller(CategoryController::class)->group(function () {
+    Route::controller(CategoryController::class)->middleware('status:active')->group(function () {
         // Category Routes
         Route::get('/category', 'index')->name('admin.category');
         Route::post('/category', 'store')->name('admin.category');
@@ -66,5 +69,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/subcategory/{id}/edit', 'sub_update')->name('sub_category.edit');
 
         Route::get('/subcategory/{id}/delete', 'sub_destroy')->name('sub_category.delete');
+    });
+
+    Route::controller(AdminController::class)->middleware('status:active')->group(function(){
+        Route::get('/manage', 'manage')->name('admin.manage');
+        Route::get('/active/{id}', 'active')->name('admin.active');
+        Route::get('/inactive/{id}', 'inactive')->name('admin.inactive');
     });
 });

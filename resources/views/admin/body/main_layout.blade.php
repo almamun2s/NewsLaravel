@@ -29,6 +29,8 @@
     <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <!-- icons -->
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Toastr alert CSS -->
@@ -129,7 +131,7 @@
 
     <!-- Validation js -->
     <script src="{{ asset('backend/assets/js/validation.min.js') }}"></script>
-    
+
     <!-- Code js -->
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 

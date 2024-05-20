@@ -130,4 +130,61 @@ class AdminController extends Controller
         );
         return redirect()->back()->with($notification)->with("status", "Password changed Successfully");
     }
+
+    /**
+     * Showing admin manage page
+     */
+    public function manage()
+    {
+        $admins = User::where('role', 'admin')->latest()->get();
+        return view('admin.manage.admins', compact('admins'));
+    }
+
+    /**
+     * Check Admin status
+     *
+     * @param integer $id // Other user id to match with current user. If match redirect to 404.
+     */
+    private function check_admin(int $id)
+    {
+        if (Auth::user()->id == $id) {
+            abort(404);
+        }
+    }
+
+    /**
+     * Making Admin Active
+     * @param int $id 
+     */
+    public function active(int $id)
+    {
+        $admin = User::findOrFail($id);
+        $this->check_admin($id);
+
+        $admin->update(['status' => 'active']);
+
+        $notification = array(
+            'message' => 'Admin Actived',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Making Admin Inctive
+     * @param int $id 
+     */
+    public function inactive(int $id)
+    {
+        $admin = User::findOrFail($id);
+        $this->check_admin($id);
+
+        $admin->update(['status' => 'inactive']);
+
+        $notification = array(
+            'message' => 'Admin Deactived',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
+    }
 }
