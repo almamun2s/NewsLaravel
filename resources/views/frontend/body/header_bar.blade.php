@@ -4,7 +4,10 @@
             <div class="col-lg-4 col-md-4">
                 <div class="date">
                     <i class="lar la-calendar"></i>
-                    Dhaka, Saturday, 10th September 2022
+                    @php
+                        $cDate = new DateTime();
+                    @endphp
+                    {{ $cDate->format('l d-m-Y') }}
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
