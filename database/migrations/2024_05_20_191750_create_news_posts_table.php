@@ -18,16 +18,16 @@ return new class extends Migration
             $table->integer('subcategory_id')->nullable();
             $table->string('title');
             $table->string('title_slug');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->text('details');
             $table->string('tags')->nullable();
-            $table->boolean('breaking_news')->default(0);
-            $table->boolean('top_slider')->default(0);
-            $table->boolean('section_three')->default(0);
-            $table->boolean('section_nine')->default(0);
+            $table->boolean('breaking_news')->default(0)->nullable();
+            $table->boolean('top_slider')->default(0)->nullable();
+            $table->boolean('section_three')->default(0)->nullable();
+            $table->boolean('section_nine')->default(0)->nullable();
             $table->string('date')->nullable();
             $table->string('month')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['publish', 'archive',])->default('archive');
             $table->timestamps();
         });
     }

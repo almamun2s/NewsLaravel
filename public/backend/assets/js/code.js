@@ -25,3 +25,25 @@ $(function () {
         })
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('deleteForm');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Delete This Data?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    });
+});

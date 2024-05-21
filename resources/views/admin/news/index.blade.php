@@ -49,34 +49,23 @@
                                     @foreach ($allNews as $key => $news)
                                         <tr>
                                             <td>{{ $key + 1 }} </td>
-                                            <td>{{ $news->image }} </td>
-                                            <td>{{ $news->title }} </td>
-                                            <td>{{ $news->category_id }} </td>
-                                            <td>{{ $news->user_id }} </td>
-                                            <td>{{ $news->date }} </td>
-                                            <td>{{ $news->status }} </td>
+                                            <td><img src="{{ $news->getImg() }}" alt="" width="75px"> </td>
+                                            <td>{{ str($news->title)->limit(20) }} </td>
+                                            <td>{{ $news->category->name }}
+                                                {{ $news->subCategory != null ? ' -->' . $news->subCategory->name : '' }}
+                                            </td>
+                                            <td>{{ $news->user->fname }} {{ $news->user->lname }} </td>
+                                            <td>{{ $news->created_at->diffForHumans() }} </td>
                                             <td>
-                                                @if ($news->status == 'active')
-                                                    <span class="btn btn-success waves-effect waves-light">Active</span>
+                                                @if ($news->status == 'publish')
+                                                    <span class="btn btn-success waves-effect waves-light">Published</span>
                                                 @else
-                                                    <span class="btn btn-danger waves-effect waves-light">Inactive</span>
+                                                    <span class="btn btn-danger waves-effect waves-light">Archived</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                {{-- @if (auth()->user()->id == $admin->id)
-                                                    <span>This is you</span>
-                                                @else
-                                                    @if ($admin->status == 'active')
-                                                        <a href="{{ route('admin.inactive', $admin->id ) }}"
-                                                            class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                            title="Make Inactive"><i
-                                                                class="fa-solid fa-thumbs-down"></i></a>
-                                                    @else
-                                                        <a href="{{ route('admin.active', $admin->id ) }}"
-                                                            class="btn btn-primary rounded-pill waves-effect waves-light"
-                                                            title="Make Active"><i class="fa-solid fa-thumbs-up"></i> </a>
-                                                    @endif
-                                                @endif --}}
+                                                <a href="{{ url("/admin/news_post/$news->id/edit") }}" title="Edit News"
+                                                    class="btn btn-warning rounded-pill waves-effect waves-light">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -1,6 +1,6 @@
 @extends('admin.body.main_layout')
 
-@section('title', 'Add News Post')
+@section('title', 'Edit News')
 
 @section('content')
     <div class="content">
@@ -19,7 +19,7 @@
                                 <li class="breadcrumb-item active">Datatables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Add News Post </h4>
+                        <h4 class="page-title">Edit News </h4>
                     </div>
                 </div>
             </div>
@@ -30,13 +30,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Add News Post </h4>
+                            <h4 class="header-title">Edit News </h4>
 
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <form action="{{ url('/admin/news_post') }}" method="post"
+                                    <form action="{{ url("/admin/news_post/$news->id") }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
+                                        @method('PUT')
 
                                         <div class="form-group mb-3">
                                             <label for="category" class="form-label">Category</label>
@@ -45,7 +46,7 @@
                                                 <option value="">-- Select --</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
-                                                        {{ $category->id == old('category_id') ? 'selected' : '' }}>
+                                                        {{ $category->id == $news->category_id ? 'selected' : '' }}>
                                                         {{ $category->name }} </option>
                                                 @endforeach
                                             </select>
@@ -58,13 +59,18 @@
                                             <label for="sub_category" class="form-label">Sub Category (Optional)</label>
                                             <select class="form-select" name="subcategory_id" id="sub_category">
                                                 <option value="">-- Select Sub Category --</option>
+                                                @foreach ($sub_categories as $sub_category)
+                                                    <option value="{{ $sub_category->id }}"
+                                                        {{ $sub_category->id == $news->subcategory_id ? 'selected' : '' }}>
+                                                        {{ $sub_category->name }} </option>
+                                                @endforeach
                                             </select>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label for="title" class="form-label">Title</label>
                                             <input type="text" name="title" id="title" class="form-control"
-                                                placeholder="Write your news title here" value="{{ old('title') }}">
+                                                placeholder="Write your news title here" value="{{ $news->title }}">
                                             @error('title')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
@@ -72,7 +78,7 @@
 
                                         <div class="form-group mb-3">
                                             <label for="wysiwyg" class="form-label">Description</label>
-                                            <textarea name="details" id="wysiwyg">{{ old('details') }}</textarea>
+                                            <textarea name="details" id="wysiwyg">{{ $news->details }}</textarea>
                                             @error('details')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
@@ -89,14 +95,14 @@
                                             </div>
                                             <div class="form-group col-lg-3"></div>
                                             <div class="form-group col-lg-3">
-                                                <img src="{{ asset('uploads/no_image.jpg') }}" alt=""
-                                                    width="100px" id="image_preview">
+                                                <img src="{{ $news->getImg() }}" alt="" width="100px"
+                                                    id="image_preview">
                                             </div>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label for="tags" class="form-label">Tags</label>
-                                            <input type="text" value="{{ old('tags') }}" name="tags" id="tags"
+                                            <input type="text" value="{{ $news->tags }}" name="tags" id="tags"
                                                 class="selectize-close-btn" value="">
                                             @error('tags')
                                                 <span class="text-danger">{{ $message }} </span>
@@ -109,7 +115,7 @@
                                                 <div class="form-check mb-2 form-check-success">
                                                     <input class="form-check-input rounded-circle" type="checkbox"
                                                         value="1" name="breaking_news"
-                                                        {{ old('breaking_news') == 1 ? 'checked' : '' }}
+                                                        {{ $news->breaking_news == 1 ? 'checked' : '' }}
                                                         id="breaking_news">
                                                     <label class="form-check-label" for="breaking_news">Breaking
                                                         News</label>
@@ -119,7 +125,7 @@
                                             <div class="col-lg-2">
                                                 <div class="form-check mb-2 form-check-success">
                                                     <input class="form-check-input rounded-circle" type="checkbox"
-                                                        value="1" {{ old('top_slider') == 1 ? 'checked' : '' }}
+                                                        value="1" {{ $news->top_slider == 1 ? 'checked' : '' }}
                                                         name="top_slider" id="top_slider">
                                                     <label class="form-check-label" for="top_slider">Top Slider</label>
                                                 </div>
@@ -128,7 +134,7 @@
                                             <div class="col-lg-2">
                                                 <div class="form-check mb-2 form-check-success">
                                                     <input class="form-check-input rounded-circle" type="checkbox"
-                                                        value="1" {{ old('section_three') == 1 ? 'checked' : '' }}
+                                                        value="1" {{ $news->section_three == 1 ? 'checked' : '' }}
                                                         name="section_three" id="section_three">
                                                     <label class="form-check-label" for="section_three">Section
                                                         three</label>
@@ -138,7 +144,7 @@
                                             <div class="col-lg-2">
                                                 <div class="form-check mb-2 form-check-success">
                                                     <input class="form-check-input rounded-circle" type="checkbox"
-                                                        value="1" {{ old('section_nine') == 1 ? 'checked' : '' }}
+                                                        value="1" {{ $news->section_nine == 1 ? 'checked' : '' }}
                                                         name="section_nine" id="section_nine">
                                                     <label class="form-check-label" for="section_nine">Section
                                                         nine</label>
@@ -148,7 +154,8 @@
                                             <div class="col-lg-2">
                                                 <div class="form-check mb-2 form-check-success">
                                                     <input class="form-check-input rounded-circle" type="checkbox"
-                                                        value="1" checked name="news_status" id="news_status">
+                                                        value="1" {{ $news->status == 'publish' ? 'checked' : '' }}
+                                                        name="news_status" id="news_status">
                                                     <label class="form-check-label" for="news_status">Publish</label>
                                                 </div>
                                             </div>
@@ -156,10 +163,19 @@
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add News
-                                            Post</button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Update
+                                            News</button>
                                     </form>
                                 </div> <!-- end col -->
+
+                                <div class="col-lg-3">
+                                    <form action="{{ url("admin/news_post/$news->id") }}" method="post" id="deleteForm">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input class="btn btn-outline-danger rounded-pill waves-effect waves-light"
+                                            type="submit" value="Delete">
+                                    </form>
+                                </div>
                             </div>
 
                             <!-- end row-->
