@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -55,7 +55,7 @@ class CategoryController extends Controller
             'category_name.min' => 'Category Name should be at least 3 charactors',
         ]);
 
-        $slug = $this->make_slug( new Category() ,  $request->category_name);
+        $slug = $this->make_slug(new Category(), $request->category_name);
 
         Category::insert([
             'name' => $request->category_name,
@@ -156,7 +156,7 @@ class CategoryController extends Controller
             'sub_category_name.min' => 'SubCategory Name should be at least 3 charactors',
         ]);
 
-        $slug = $this->make_slug( new SubCategory() , $request->sub_category_name);
+        $slug = $this->make_slug(new SubCategory(), $request->sub_category_name);
 
         SubCategory::insert([
             'category_id' => $request->category_id,
@@ -232,5 +232,16 @@ class CategoryController extends Controller
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Ajax sub category find by category id
+     * @param int $cat_id
+     */
+    public function ajax_sub_cat(int $cat_id)
+    {
+        $subcat = SubCategory::where('category_id', $cat_id)->orderBy('name', 'ASC')->get();
+        
+        return json_encode($subcat);
     }
 }

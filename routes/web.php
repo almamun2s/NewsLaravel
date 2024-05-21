@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\NewsPostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ require __DIR__ . '/auth.php';
 
 // Admin Routes 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/', function(){
+    Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     });
     Route::get('/dashboard', [AdminController::class, 'show_dashboard'])->name('admin.dashboard');
@@ -60,7 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/category/{id}/edit', 'update')->name('category.edit');
 
         Route::get('/category/{id}/delete', 'destroy')->name('category.delete');
-        
+
         // Sub Category Routes
         Route::get('/subcategory', 'sub_index')->name('admin.sub_category');
         Route::post('/subcategory', 'sub_store')->name('admin.sub_category');
@@ -69,11 +70,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/subcategory/{id}/edit', 'sub_update')->name('sub_category.edit');
 
         Route::get('/subcategory/{id}/delete', 'sub_destroy')->name('sub_category.delete');
+
+        Route::get('/sub_category/ajax/{cat_id}', 'ajax_sub_cat');
     });
 
-    Route::controller(AdminController::class)->middleware('status:active')->group(function(){
+    Route::controller(AdminController::class)->middleware('status:active')->group(function () {
         Route::get('/manage', 'manage')->name('admin.manage');
         Route::get('/active/{id}', 'active')->name('admin.active');
         Route::get('/inactive/{id}', 'inactive')->name('admin.inactive');
     });
+
+    Route::resource('/news_post', NewsPostController::class)->middleware('status:active');
 });

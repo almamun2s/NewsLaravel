@@ -37,14 +37,14 @@
                                     <form action="{{ route('admin.sub_category') }}" id="myForm" method="post">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <label for="simpleinput" class="form-label">Category Name</label>
-                                            <select class="form-select" name="category_id">
-                                                <option value="">-- Select Category --</option>
+                                            <label for="select-code-category" class="form-label">Category</label>
+                                            <select id="select-code-category" class="selectize-drop-header"
+                                                name="category_id" placeholder="Select a Category...">
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }} </option>
                                                 @endforeach
                                             </select>
-                                            @error('category')
+                                            @error('category_id')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                         </div>

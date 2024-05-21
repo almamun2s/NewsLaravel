@@ -46,6 +46,24 @@
                         </div>
                     </li>
 
+                    <li>
+                        <a href="#newsPost" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-newspaper"></i>
+                            <span class="material-icons-outlined">News Post</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="newsPost">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ url('/admin/news_post') }}">News Posts</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/admin/news_post/create') }}">Add News Post</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
 
                     <li class="menu-title mt-2">Settings</li>
 

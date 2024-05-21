@@ -38,23 +38,23 @@
                                         method="post">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <label for="simpleinput" class="form-label">Category Name</label>
-                                            <select class="form-select" name="category_id">
-                                                <option value="">-- Select Category --</option>
+                                            <label for="select-code-category" class="form-label">Category</label>
+                                            <select id="select-code-category" class="selectize-drop-header"
+                                                name="category_id" placeholder="Select a Category...">
                                                 @foreach ($categories as $category)
                                                     <option
                                                         {{ $subcategory->category_id == $category->id ? 'selected' : '' }}
                                                         value="{{ $category->id }}">{{ $category->name }} </option>
                                                 @endforeach
                                             </select>
-                                            @error('category')
+                                            @error('category_id')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="simpleinput" class="form-label">Sub Category Name</label>
                                             <input type="text" name="sub_category_name" autocomplete="off"
-                                                value="{{ $category->name }}" class="form-control">
+                                                value="{{ $subcategory->name }}" class="form-control">
                                             @error('sub_category_name')
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror

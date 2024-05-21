@@ -17,6 +17,9 @@
     <link href="{{ asset('backend/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
         type="text/css" />
 
+    <!-- CSS for Select form -->
+    <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+
 
     <!-- third party css for DataTables -->
     <link href="{{ asset('backend/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}"
@@ -108,7 +111,13 @@
     <script src="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
+    <!-- CSS for Select form -->
     <script src="{{ asset('backend/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <!-- Select Init js-->
+    <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+
 
     <!-- Dashboar 1 init js-->
     <script src="{{ asset('backend/assets/js/pages/dashboard-1.init.js') }}"></script>
@@ -136,7 +145,13 @@
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
 
-
+    <!-- tinymce js -->
+    <script src="{{ asset('js/tiny/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#wysiwyg'
+        });
+    </script>
 
 
     <!-- Toastr js-->
