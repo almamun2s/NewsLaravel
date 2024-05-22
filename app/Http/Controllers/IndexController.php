@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\NewsPost;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -22,7 +24,50 @@ class IndexController extends Controller
         return view('frontend.home', compact(['topSliders', 'sectionThree', 'sectionNine', 'latestNews', 'popularNews']));
     }
 
+    /**
+     * Showing all news in one page
+     */
+    public function all_news()
+    {
+        $allNews = NewsPost::where('status', 'publish')->latest()->get();
+        $category_name = 'All News';
+        $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+        return view('frontend.news.index', compact(['allNews', 'category_name', 'latestNews', 'popularNews']));
+    }
 
+    /**
+     * Showing category wise news
+     *
+     * @param integer $id // Category Id 
+     * @param string $slug // Category Slug
+     */
+    public function category_news(int $id, string $slug)
+    {
+        $category = Category::findOrFail($id);
+        $allNews = NewsPost::where('category_id', $category->id)->where('status', 'publish')->latest()->get();
+        $category_name = $category->name;
+        $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+        return view('frontend.news.index', compact(['allNews', 'category_name', 'latestNews', 'popularNews']));
+    }
+
+    /**
+     * Showing sub category wise news
+     *
+     * @param integer $id // SubCategory Id 
+     * @param string $slug // SubCategory Slug
+     */
+    public function sub_category_news(int $id, string $slug)
+    {
+        $sub_category = SubCategory::findOrFail($id);
+        $allNews = NewsPost::where('subcategory_id', $sub_category->id)->where('status', 'publish')->latest()->get();
+
+        $category_name = $sub_category->category->name . ' >> ' . $sub_category->name;
+        $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+        return view('frontend.news.index', compact(['allNews', 'category_name', 'latestNews', 'popularNews']));
+    }
     /**
      * Showing News Details page
      *

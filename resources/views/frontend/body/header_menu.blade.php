@@ -10,25 +10,27 @@
                         <img src="assets/images/footer_logo.gif" alt="Logo" title="Logo">
                     </a>
                 </div>
-                <div class="stellarnav dark desktop"><a href="{{ url('/') }}"
-                        class="menu-toggle full"><span class="bars"><span></span><span></span><span></span></span>
+                <div class="stellarnav dark desktop"><a href="{{ url('/') }}" class="menu-toggle full"><span
+                            class="bars"><span></span><span></span><span></span></span>
                     </a>
                     <ul id="menu-main-menu" class="menu">
                         <li id="menu-item-89"
                             class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-89">
-                            <a href="{{ url('/') }}" aria-current="page"> <i
-                                    class="fa-solid fa-house-user"></i> Home</a>
+                            <a href="{{ url('/') }}" aria-current="page"> <i class="fa-solid fa-house-user"></i>
+                                Home</a>
                         </li>
                         @foreach ($categories as $category)
                             <li id="menu-item-291"
                                 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-291 has-sub">
-                                <a href=" ">{{ $category->name }}</a>
+                                <a
+                                    href="{{ url("/news/category/$category->id/$category->slug") }}">{{ $category->name }}</a>
                                 @if ($category->subCategories)
                                     <ul class="sub-menu">
                                         @foreach ($category->subCategories as $subCategory)
                                             <li id="menu-item-294"
                                                 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-294">
-                                                <a href=" ">{{ $subCategory->name }} </a>
+                                                <a href="{{ url("/news/subcategory/$subCategory->id/$subCategory->slug") }}">{{ $subCategory->name }}
+                                                </a>
                                             </li>
                                         @endforeach
                                     </ul>
