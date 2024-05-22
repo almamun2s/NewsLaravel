@@ -1,3 +1,6 @@
+@php
+    $breakingNews = App\Models\NewsPost::where('status', 'publish')->where('breaking_news', 1)->latest()->limit(5)->get();
+@endphp
 <div class="top-scroll-section5">
     <div class="container">
         <div class="alert" role="alert">
@@ -12,46 +15,11 @@
                         <div class="scroll5-right">
                             <marquee direction="left" scrollamount="5px" onmouseover="this.stop()"
                                 onmouseout="this.start()">
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
-                                <a href=" ">
-                                    <img src="assets/images/favicon.gif" alt="Logo" title="Logo" width="30px"
-                                        height="auto">
-                                    Pakistan bring back Hayden for T20 </a>
+                                @foreach ($breakingNews as $news)
+                                    <a href=" ">
+                                        <img src="{{ $news->getImg() }}" alt="Logo" title="Logo" width="30px"
+                                            height="auto"> {{ $news->title }} </a>
+                                @endforeach
                             </marquee>
                         </div>
                         <div class="scroolbar5">

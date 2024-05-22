@@ -43,7 +43,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="logo">
                         <a href=" " title="NewsFlash">
-                            <img src="assets/images/logo.png" alt="NewsFlash" title="NewsFlash">
+                            <img src="{{ asset('/frontend/assets/images/logo.png')}}" alt="NewsFlash" title="NewsFlash">
                         </a>
                     </div>
                 </div>

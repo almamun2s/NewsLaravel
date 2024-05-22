@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('date')->nullable();
             $table->string('month')->nullable();
             $table->enum('status', ['publish', 'archive',])->default('archive');
+            $table->integer('views')->default(0)->nullable();
             $table->timestamps();
         });
     }
