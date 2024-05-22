@@ -177,12 +177,6 @@
                         <a href=" ">Related News </a>
                     </div>
                     <div class="row">
-                        @php
-                            $relatedNews = App\Models\NewsPost::where('category_id', $news->category_id)
-                                ->where('id', '!=', $news->id)
-                                ->limit(6)
-                                ->get();
-                        @endphp
                         @foreach ($relatedNews as $news)
                             <div class="themesBazar-3 themesBazar-m2">
                                 <div class="related-wrpp">
@@ -237,10 +231,6 @@
                                 aria-labelledby="archiveRecent">
 
                                 <div class="archiveTab-sibearNews">
-                                    @php
-                                        $latestNews = App\Models\NewsPost::latest()->limit(5)->get();
-                                    @endphp
-
                                     @foreach ($latestNews as $key => $news)
                                         <div class="archive-tabWrpp archiveTab-border">
                                             <div class="archiveTab-image ">
@@ -263,10 +253,6 @@
                             <div class="tab-pane fade" id="archiveTab_popular" role="tabpanel"
                                 aria-labelledby="archivePopulars">
                                 <div class="archiveTab-sibearNews">
-
-                                    @php
-                                        $popularNews = App\Models\NewsPost::orderBy('views', 'DESC')->limit(5)->get();
-                                    @endphp
 
                                     @foreach ($popularNews as $key => $news)
                                         <div class="archive-tabWrpp archiveTab-border">

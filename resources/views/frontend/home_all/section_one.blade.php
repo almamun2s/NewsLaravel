@@ -20,14 +20,6 @@
                                 <div class="owl-stage"
                                     style="transform: translate3d(-1578px, 0px, 0px); transition: all 1s ease 0s; width: 3684px;">
 
-                                    @php
-                                        $topSliders = App\Models\NewsPost::where('status', 'publish')
-                                            ->where('top_slider', 1)
-                                            ->latest()
-                                            ->limit(5)
-                                            ->get();
-
-                                    @endphp
                                     @foreach ($topSliders as $news)
                                         <div class="owl-item" style="width: 506.25px; margin-right: 20px;">
                                             <div class="secOne_newsContent">
@@ -62,13 +54,7 @@
 
                     </div>
                     <div class="col-lg-5 col-md-5">
-                        @php
-                            $sectionThree = App\Models\NewsPost::where('status', 'publish')
-                                ->where('section_three', 1)
-                                ->latest()
-                                ->limit(3)
-                                ->get();
-                        @endphp
+
                         @foreach ($sectionThree as $news)
                             <div class="secOne-smallItem">
                                 <div class="secOne-smallImg">
@@ -88,13 +74,7 @@
                 </div>
                 <div class="sec-one-item2">
                     <div class="row">
-                        @php
-                            $sectionNine = App\Models\NewsPost::where('status', 'publish')
-                                ->where('section_nine', 1)
-                                ->latest()
-                                ->limit(9)
-                                ->get();
-                        @endphp
+                        
                         @foreach ($sectionNine as $news)
                             <div class="themesBazar-3 themesBazar-m2">
                                 <div class="sec-one-wrpp2">
@@ -173,10 +153,6 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane active show  fade" id="recent" role="tabpanel" aria-labelledby="recent">
                         <div class="news-titletab">
-
-                            @php
-                                $latestNews = App\Models\NewsPost::latest()->limit(5)->get();
-                            @endphp
                             @foreach ($latestNews as $news)
                                 <div class="tab-image tab-border">
                                     <a
@@ -195,9 +171,6 @@
                     </div>
                     <div class="tab-pane fade" id="popular" role="tabpanel" aria-labelledby="popular">
                         <div class="news-titletab">
-                            @php
-                                $popularNews = App\Models\NewsPost::orderBy('views', 'DESC')->limit(5)->get();
-                            @endphp
                             @foreach ($popularNews as $news)
                                 <div class="tab-image tab-border">
                                     <a
