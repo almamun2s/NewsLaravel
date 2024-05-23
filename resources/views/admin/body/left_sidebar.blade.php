@@ -25,6 +25,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('admin.banner') }}">
+                        <i class="fa-solid fa-image"></i>
+                        <span>Banner</span>
+                    </a>
+                </li>
+
                 @if (auth()->user()->status == 'active')
                     <li class="menu-title mt-2">Menu</li>
 
