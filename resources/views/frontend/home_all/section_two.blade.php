@@ -1,9 +1,13 @@
+@php
+    $banner_home1 = App\Models\Banner::find(1);
+    $banner_home2 = App\Models\Banner::find(2);
+@endphp
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6">
             <div class="themesBazar_widget">
                 <div class="textwidget">
-                    <p><img loading="lazy" class="aligncenter size-full wp-image-74" src="assets/images/biggapon-1.gif"
+                    <p><img loading="lazy" class="aligncenter size-full wp-image-74" src="{{ $banner_home1->getImg() }}"
                             alt="" width="100%" height="auto"></p>
                 </div>
             </div>
@@ -11,7 +15,7 @@
         <div class="col-lg-6 col-md-6">
             <div class="themesBazar_widget">
                 <div class="textwidget">
-                    <p><img loading="lazy" class="aligncenter size-full wp-image-74" src="assets/images/biggapon-1.gif"
+                    <p><img loading="lazy" class="aligncenter size-full wp-image-74" src="{{ $banner_home2->getImg() }}"
                             alt="" width="100%" height="auto"></p>
                 </div>
             </div>
