@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
@@ -87,5 +88,15 @@ class IndexController extends Controller
             Session::put($newsKey, 1);
         }
         return view('frontend.news.news_details', compact(['news', 'relatedNews', 'latestNews', 'popularNews']));
+    }
+
+    /**
+     * For changing languages
+     * @param Request $request
+     */
+    public function changlang(Request $request){
+        App::setLocale($request->lang);
+        Session::put('locale', $request->lang );
+        return redirect()->back();
     }
 }

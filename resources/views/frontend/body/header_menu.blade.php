@@ -23,7 +23,7 @@
                             <li id="menu-item-291"
                                 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-291 has-sub">
                                 <a
-                                    href="{{ url("/news/category/$category->id/$category->slug") }}">{{ $category->name }}</a>
+                                    href="{{ url("/news/category/$category->id/$category->slug") }}">{{  GoogleTranslate::trans( $category->name , app()->getLocale() ) }}</a>
                                 @if ($category->subCategories)
                                     <ul class="sub-menu">
                                         @foreach ($category->subCategories as $subCategory)

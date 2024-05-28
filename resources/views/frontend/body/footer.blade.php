@@ -4,7 +4,8 @@
             <div class="menu-footer-menu-container">
                 <ul id="menu-footer-menu" class="menu">
                     <li id="menu-item-550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-550">
-                        <a href=" ">ABOUT ALL</a></li>
+                        <a href=" ">ABOUT ALL</a>
+                    </li>
                     <li id="menu-item-551"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-551"><a
                             href=" ">COMPANY</a></li>
