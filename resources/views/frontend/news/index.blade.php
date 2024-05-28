@@ -17,7 +17,7 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="rachive-info-cats">
                         <a href=" "><i class="las la-home"></i> </a> <i class="las la-chevron-right"></i>
-                        {{ $category_name }}
+                        {{ GoogleTranslate::trans($category_name, app()->getLocale()) }}
                     </div>
 
 
@@ -36,7 +36,8 @@
                                         </div>
                                         <div class="archive1-padding">
                                             <div class="archive1-title"><a
-                                                    href="{{ url("/news/$news->id/$news->title_slug") }}">{{ $news->title }}
+                                                    href="{{ url("/news/$news->id/$news->title_slug") }}">
+                                                    {{ GoogleTranslate::trans($news->title, app()->getLocale()) }}
                                                 </a>
                                             </div>
                                             {{-- <div class="content-details">{!! $news->details !!} <a
@@ -71,7 +72,7 @@
                                                 </div>
                                                 <div class="archive1-padding">
                                                     <div class="archive1-title2"><a
-                                                            href="{{ url("/news/$news->id/$news->title_slug") }}">{{ str($news->title)->limit(40) }}</a>
+                                                            href="{{ url("/news/$news->id/$news->title_slug") }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,7 +105,7 @@
                                 </div>
                                 <div class="archive1-padding">
                                     <div class="archive1-title2"><a
-                                            href="{{ url("/news/$news->id/$news->title_slug") }}">{{ str($news->title)->limit(40) }}
+                                            href="{{ url("/news/$news->id/$news->title_slug") }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
                                         </a>
                                     </div>
                                 </div>

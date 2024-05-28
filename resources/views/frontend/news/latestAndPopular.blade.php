@@ -12,11 +12,11 @@
             <ul class="nav nav-pills" id="singlePopular-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <div class="nav-link active" data-bs-toggle="pill" data-bs-target="#archiveTab_recent"
-                        role="tab" aria-controls="archiveRecent" aria-selected="true"> LATEST </div>
+                        role="tab" aria-controls="archiveRecent" aria-selected="true"> {{ GoogleTranslate::trans( 'LATEST', app()->getLocale()) }}  </div>
                 </li>
                 <li class="nav-item" role="presentation">
                     <div class="nav-link" data-bs-toggle="pill" data-bs-target="#archiveTab_popular" role="tab"
-                        aria-controls="archivePopulars" aria-selected="false"> POPULAR
+                        aria-controls="archivePopulars" aria-selected="false"> {{ GoogleTranslate::trans( 'POPULAR', app()->getLocale()) }} 
                     </div>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
                             <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                 class="archiveTab-icon2"><i class="la la-play"></i></a>
                             <h4 class="archiveTab_hadding"><a
-                                    href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str($news->title)->limit(40) }}
+                                    href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
                                 </a>
                             </h4>
                             <div class="archive-conut"> {{ $key + 1 }} </div>
@@ -56,7 +56,7 @@
                             <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                 class="archiveTab-icon2"><i class="la la-play"></i></a>
                             <h4 class="archiveTab_hadding"><a
-                                    href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str($news->title)->limit(40) }}
+                                    href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
                                 </a>
                             </h4>
                             <div class="archive-conut">

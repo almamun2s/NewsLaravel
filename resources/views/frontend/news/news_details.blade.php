@@ -16,15 +16,22 @@
                             <i class="la la-home"> </i><a href="{{ route('home') }}"> HOME </a>
                         </div>
                         <div class="single-cats">
-                            <i class="la la-bars"></i> <a href=" " rel="category tag"> {{ $news->category->name }}
+                            <i class="la la-bars"></i> <a
+                                href="{{ url('/news/category/' . $news->category->id . '/' . $news->category->slug . '') }}"
+                                rel="category tag">
+                                {{ GoogleTranslate::trans($news->category->name, app()->getLocale()) }}
+
                             </a>
                             @if ($news->subCategory)
-                                --> <a href=" " rel="category tag">{{ $news->subCategory->name }} </a>
+                                --> <a
+                                    href="{{ url('/news/subcategory/' . $news->subCategory->id . '/' . $news->subCategory->slug . '') }}"
+                                    rel="category tag">
+                                    {{ GoogleTranslate::trans($news->subCategory->name, app()->getLocale()) }}</a>
                             @endif
                         </div>
                     </div>
                     {{-- <h5 class="single-page-subTitle">Coaching centers to stay closed during SSC exams </h5> --}}
-                    <h1 class="single-page-title">{{ $news->title }} </h1>
+                    <h1 class="single-page-title"> {{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </h1>
                     <div class="row g-2">
                         <div class="col-lg-1 col-md-2 ">
                             <div class="reportar-image">
@@ -44,7 +51,7 @@
 
                     <div class="single-image">
                         <a href=" "><img class="lazyload" src="{{ $news->getImg() }}"></a>
-                        <h2 class="single-caption2">{{ $news->title }} </h2>
+                        <h2 class="single-caption2">{{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </h2>
                     </div>
 
                     <div class="single-page-add2">
@@ -59,7 +66,7 @@
                     <button id="dec" class="btn btn-info waves-effect waves-light">A-</button>
                     <news-font>
                         <div class="single-details" id="detailsText">
-                            {!! $news->details !!}
+                            {!! GoogleTranslate::trans($news->details, app()->getLocale()) !!}
                         </div>
                     </news-font>
                     <div class="singlePage2-tag">

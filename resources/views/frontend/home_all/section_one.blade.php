@@ -32,7 +32,7 @@
                                                     </h6>
                                                     <h1 class="sec-one-title">
                                                         <a
-                                                            href="{{ route('news_details', ['id' => $news->id, 'slug', $news->title_slug]) }}">{{ $news->title }}
+                                                            href="{{ route('news_details', ['id' => $news->id, 'slug', $news->title_slug]) }}">{{ GoogleTranslate::trans($news->title, app()->getLocale()) }}
                                                         </a>
                                                     </h1>
                                                 </div>
@@ -63,7 +63,7 @@
                                             class="lazyload" src="{{ $news->getImg() }}"></a>
                                     <h5 class="secOne_smallTitle">
                                         <a
-                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ GoogleTranslate::trans($news->title, app()->getLocale()) }}
                                         </a>
                                     </h5>
                                 </div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="sec-one-item2">
                     <div class="row">
-                        
+
                         @foreach ($sectionNine as $news)
                             <div class="themesBazar-3 themesBazar-m2">
                                 <div class="sec-one-wrpp2">
@@ -86,7 +86,7 @@
                                         </div>
                                         <h4 class="secOne-title2">
                                             <a
-                                                href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                                href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ GoogleTranslate::trans($news->title, app()->getLocale()) }}
                                             </a>
                                         </h4>
                                     </div>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="themesBazar_widget">
-                    <h3 style="margin-top:5px"> OLD NEWS </h3>
+                    <h3 style="margin-top:5px"> {{ GoogleTranslate::trans( 'OLD NEWS', app()->getLocale()) }} </h3>
                 </div>
                 <form class="wordpress-date" action=" " method="post">
                     <input type="date" id="wordpress" placeholder="Select Date" autocomplete="off" value=""
@@ -142,11 +142,11 @@
                         <li class="nav-item" role="presentation">
                             <div class="nav-link active" id="recent-tab" data-bs-toggle="pill"
                                 data-bs-target="#recent" role="tab" aria-controls="recent"
-                                aria-selected="false"> LATEST </div>
+                                aria-selected="false"> {{ GoogleTranslate::trans( 'LATEST', app()->getLocale()) }} </div>
                         </li>
                         <li class="nav-item" role="presentation">
                             <div class="nav-link" id="popular-tab" data-bs-toggle="pill" data-bs-target="#popular"
-                                role="tab" aria-controls="popular" aria-selected="false"> POPULAR </div>
+                                role="tab" aria-controls="popular" aria-selected="false">  {{ GoogleTranslate::trans( 'POPULAR', app()->getLocale()) }} </div>
                         </li>
                     </ul>
                 </div>
@@ -161,7 +161,7 @@
                                     <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                         class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
                                         </a></h4>
                                 </div>
                             @endforeach
@@ -179,7 +179,7 @@
                                     <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                         class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
                                         </a></h4>
                                 </div>
                             @endforeach

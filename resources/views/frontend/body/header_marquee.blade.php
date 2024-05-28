@@ -9,7 +9,7 @@
                     <div class="col-md-12 top_scroll2">
                         <div class="scroll5-left">
                             <div id="scroll5-left">
-                                <span> Breaking News :: </span>
+                                <span> {{ GoogleTranslate::trans(  'Breaking News ::' , app()->getLocale()) }} </span>
                             </div>
                         </div>
                         <div class="scroll5-right">
@@ -18,7 +18,7 @@
                                 @foreach ($breakingNews as $news)
                                     <a href=" ">
                                         <img src="{{ $news->getImg() }}" alt="Logo" title="Logo" width="30px"
-                                            height="auto"> {{ $news->title }} </a>
+                                            height="auto"> {{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </a>
                                 @endforeach
                             </marquee>
                         </div>
