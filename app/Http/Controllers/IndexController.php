@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Category;
 use App\Models\NewsPost;
 use App\Models\SubCategory;
@@ -94,9 +95,28 @@ class IndexController extends Controller
      * For changing languages
      * @param Request $request
      */
-    public function changlang(Request $request){
+    public function changlang(Request $request)
+    {
         App::setLocale($request->lang);
-        Session::put('locale', $request->lang );
+        Session::put('locale', $request->lang);
         return redirect()->back();
+    }
+
+
+    /**
+     * Search by Date
+     *
+     * @param Request $request
+     */
+    public function search_by_date(Request $request)
+    {
+        $date = new DateTime($request->date);
+        $formatDate = $date->format('d-m-Y');
+        $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+
+        $allNews = NewsPost::where('date', $formatDate)->latest()->get();
+
+        return view('frontend.news.search_by_date', compact(['allNews', 'formatDate', 'latestNews', 'popularNews']));
     }
 }

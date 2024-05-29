@@ -130,11 +130,11 @@
                     </div>
                 </div>
                 <div class="themesBazar_widget">
-                    <h3 style="margin-top:5px"> {{ GoogleTranslate::trans( 'OLD NEWS', app()->getLocale()) }} </h3>
+                    <h3 style="margin-top:5px"> {{ GoogleTranslate::trans('OLD NEWS', app()->getLocale()) }} </h3>
                 </div>
-                <form class="wordpress-date" action=" " method="post">
-                    <input type="date" id="wordpress" placeholder="Select Date" autocomplete="off" value=""
-                        name="m" required="" class="hasDatepicker">
+                <form class="wordpress-date" action="{{ route('search_by_date') }}" method="post">
+                    @csrf
+                    <input type="date" placeholder="Select Date" name="date" class="hasDatepicker">
                     <input type="submit" value="Search">
                 </form>
                 <div class="recentPopular">
@@ -142,11 +142,13 @@
                         <li class="nav-item" role="presentation">
                             <div class="nav-link active" id="recent-tab" data-bs-toggle="pill"
                                 data-bs-target="#recent" role="tab" aria-controls="recent"
-                                aria-selected="false"> {{ GoogleTranslate::trans( 'LATEST', app()->getLocale()) }} </div>
+                                aria-selected="false"> {{ GoogleTranslate::trans('LATEST', app()->getLocale()) }}
+                            </div>
                         </li>
                         <li class="nav-item" role="presentation">
                             <div class="nav-link" id="popular-tab" data-bs-toggle="pill" data-bs-target="#popular"
-                                role="tab" aria-controls="popular" aria-selected="false">  {{ GoogleTranslate::trans( 'POPULAR', app()->getLocale()) }} </div>
+                                role="tab" aria-controls="popular" aria-selected="false">
+                                {{ GoogleTranslate::trans('POPULAR', app()->getLocale()) }} </div>
                         </li>
                     </ul>
                 </div>
