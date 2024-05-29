@@ -12,15 +12,17 @@
                             {{ $cDate->format('l d-m-Y') }}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <select class="form-select changelang">
-                            <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-                            <option value="bn" {{ session()->get('locale') == 'bn' ? 'selected' : '' }}>Bangla</option>
-                            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                            <option value="hi" {{ session()->get('locale') == 'hi' ? 'selected' : '' }}>Hindi</option>
-                            <option value="tr" {{ session()->get('locale') == 'tr' ? 'selected' : '' }}>Turkish</option>
-                        </select>
-                    </div>
+                    @if (translatable())
+                        <div class="col-md-6">
+                            <select class="form-select changelang">
+                                <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+                                <option value="bn" {{ session()->get('locale') == 'bn' ? 'selected' : '' }}>Bangla</option>
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="hi" {{ session()->get('locale') == 'hi' ? 'selected' : '' }}>Hindi</option>
+                                <option value="tr" {{ session()->get('locale') == 'tr' ? 'selected' : '' }}>Turkish</option>
+                            </select>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-3 col-md-3">

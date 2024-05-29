@@ -19,19 +19,18 @@
                             <i class="la la-bars"></i> <a
                                 href="{{ url('/news/category/' . $news->category->id . '/' . $news->category->slug . '') }}"
                                 rel="category tag">
-                                {{ GoogleTranslate::trans($news->category->name, app()->getLocale()) }}
-
+                                {{ translateThis($news->category->name) }}
                             </a>
                             @if ($news->subCategory)
                                 --> <a
                                     href="{{ url('/news/subcategory/' . $news->subCategory->id . '/' . $news->subCategory->slug . '') }}"
                                     rel="category tag">
-                                    {{ GoogleTranslate::trans($news->subCategory->name, app()->getLocale()) }}</a>
+                                    {{ translateThis($news->subCategory->name) }}
+                                </a>
                             @endif
                         </div>
                     </div>
-                    {{-- <h5 class="single-page-subTitle">Coaching centers to stay closed during SSC exams </h5> --}}
-                    <h1 class="single-page-title"> {{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </h1>
+                    <h1 class="single-page-title">{{ translateThis($news->title) }}</h1>
                     <div class="row g-2">
                         <div class="col-lg-1 col-md-2 ">
                             <div class="reportar-image">
@@ -42,7 +41,8 @@
                             <div class="reportar-title">{{ $news->user->fname }} {{ $news->user->lname }}</div>
                             <div class="viwe-count">
                                 <ul>
-                                    <li><i class="la la-clock-o"></i>Posted {{ $news->created_at->format('l d M Y') }} </li>
+                                    <li><i class="la la-clock-o"></i>Posted {{ $news->created_at->format('l d M Y') }}
+                                    </li>
                                     <li> <i class="la la-eye"></i> {{ $news->views }} Views</li>
                                 </ul>
                             </div>
@@ -51,7 +51,7 @@
 
                     <div class="single-image">
                         <a href=" "><img class="lazyload" src="{{ $news->getImg() }}"></a>
-                        <h2 class="single-caption2">{{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </h2>
+                        <h2 class="single-caption2"> {{ translateThis($news->title) }}</h2>
                     </div>
 
                     <div class="single-page-add2">
@@ -65,9 +65,7 @@
                     <button id="inc" class="btn btn-info waves-effect waves-light">A+</button>
                     <button id="dec" class="btn btn-info waves-effect waves-light">A-</button>
                     <news-font>
-                        <div class="single-details" id="detailsText">
-                            {!! GoogleTranslate::trans($news->details, app()->getLocale()) !!}
-                        </div>
+                        <div class="single-details" id="detailsText">{!! translateThis($news->details) !!}</div>
                     </news-font>
                     <div class="singlePage2-tag">
                         <span> Tags : </span>

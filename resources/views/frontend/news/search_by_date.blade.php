@@ -30,15 +30,14 @@
                                             <div class="archive1-meta">
                                                 <a href="{{ url("/news/$news->id/$news->title_slug") }}"><i
                                                         class="la la-tags"> </i>
-                                                    {{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
+                                                    {{ str(translateThis($news->title))->limit(40) }}
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="archive1-padding">
                                             <div class="archive1-title2"><a
                                                     href="{{ url("/news/$news->id/$news->title_slug") }}">
-                                                    {{ str(GoogleTranslate::trans($news->title, app()->getLocale()))->limit(40) }}
-                                                </a>
+                                                    {{ str(translateThis($news->title))->limit(40) }} </a>
                                             </div>
                                         </div>
                                     </div>

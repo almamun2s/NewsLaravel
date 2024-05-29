@@ -1,5 +1,9 @@
 @php
-    $breakingNews = App\Models\NewsPost::where('status', 'publish')->where('breaking_news', 1)->latest()->limit(5)->get();
+    $breakingNews = App\Models\NewsPost::where('status', 'publish')
+        ->where('breaking_news', 1)
+        ->latest()
+        ->limit(5)
+        ->get();
 @endphp
 <div class="top-scroll-section5">
     <div class="container">
@@ -9,7 +13,7 @@
                     <div class="col-md-12 top_scroll2">
                         <div class="scroll5-left">
                             <div id="scroll5-left">
-                                <span> {{ GoogleTranslate::trans(  'Breaking News ::' , app()->getLocale()) }} </span>
+                                <span>{{ translateThis('Breaking News ::') }}</span>
                             </div>
                         </div>
                         <div class="scroll5-right">
@@ -18,7 +22,9 @@
                                 @foreach ($breakingNews as $news)
                                     <a href=" ">
                                         <img src="{{ $news->getImg() }}" alt="Logo" title="Logo" width="30px"
-                                            height="auto"> {{ GoogleTranslate::trans($news->title, app()->getLocale()) }} </a>
+                                            height="auto">
+                                        {{ translateThis($news->title) }}
+                                    </a>
                                 @endforeach
                             </marquee>
                         </div>

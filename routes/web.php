@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\NewsPostController;
+use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -90,6 +91,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
     Route::get('/banner', [BannerController::class, 'show_banners'])->name('admin.banner');
     Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');
-
+    
+    Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
+    Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
 
 });

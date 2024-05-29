@@ -22,15 +22,17 @@
                         @foreach ($categories as $category)
                             <li id="menu-item-291"
                                 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-291 has-sub">
-                                <a
-                                    href="{{ url("/news/category/$category->id/$category->slug") }}">{{ GoogleTranslate::trans($category->name, app()->getLocale()) }}</a>
+                                <a href="{{ url("/news/category/$category->id/$category->slug") }}">
+                                    {{ translateThis($category->name) }}
+                                </a>
                                 @if ($category->subCategories)
                                     <ul class="sub-menu">
                                         @foreach ($category->subCategories as $subCategory)
                                             <li id="menu-item-294"
                                                 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-294">
                                                 <a
-                                                    href="{{ url("/news/subcategory/$subCategory->id/$subCategory->slug") }}">{{ GoogleTranslate::trans($subCategory->name, app()->getLocale()) }}
+                                                    href="{{ url("/news/subcategory/$subCategory->id/$subCategory->slug") }}">
+                                                    {{ translateThis($subCategory->name) }}
                                                 </a>
                                             </li>
                                         @endforeach
