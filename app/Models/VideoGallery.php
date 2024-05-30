@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model
+class VideoGallery extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
     /**
-     * Getting Banner Image
+     * Getting Video gallery image
      */
     public function getImg()
     {
         if ($this->image != null) {
-            return url('uploads/banner/' . $this->image);
+            return url('uploads/gallery/videos/' . $this->image);
         } else {
-            return url('uploads/no_profile_pic.png');
+            return url('uploads/no_image.jpg');
         }
     }
 }

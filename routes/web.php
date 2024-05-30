@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\NewsPostController;
-use App\Http\Controllers\Backend\PhotoGalleryController;
 use App\Http\Controllers\Backend\SettingsController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\PhotoGalleryController;
+use App\Http\Controllers\Backend\VideoGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::resource('/news_post', NewsPostController::class);
         Route::resource('/photo_gallery', PhotoGalleryController::class);
+        Route::resource('/video_gallery', VideoGalleryController::class);
 
         Route::get('/banner', [BannerController::class, 'show_banners'])->name('admin.banner');
         Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');

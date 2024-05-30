@@ -80,7 +80,7 @@ class NewsPostController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'News Posed Successfully',
+            'message' => 'News Posted Successfully',
             'alert-type' => 'success'
         );
         return redirect('/admin/news_post')->with($notification);

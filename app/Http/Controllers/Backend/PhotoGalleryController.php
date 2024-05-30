@@ -57,7 +57,7 @@ class PhotoGalleryController extends Controller
      */
     public function show(string $id)
     {
-        dd('show');
+        abort(404);
     }
 
     /**
@@ -65,7 +65,7 @@ class PhotoGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        dd('edit');
+        abort(404);
     }
 
     /**
@@ -73,7 +73,7 @@ class PhotoGalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd('update');
+        abort(404);
     }
 
     /**

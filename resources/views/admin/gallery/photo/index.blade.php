@@ -31,8 +31,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            {{-- <h4 class="header-title">Add Category</h4> --}}
-
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form action="{{ url('admin/photo_gallery') }}" id="myForm" method="post"
@@ -79,8 +77,6 @@
                                             <td><img src="{{ $photo->getImg() }}" alt="" width="75px"> </td>
                                             <td>{{ $photo->created_at->diffForHumans() }} </td>
                                             <td>
-                                                {{-- <a href="" title="Edit News" --}}
-                                                {{-- class="btn btn-warning rounded-pill waves-effect waves-light">Edit</a> --}}
                                                 <form action="{{ url("admin/photo_gallery/$photo->id") }}"
                                                     method="post" class="deleteForm">
                                                     @csrf

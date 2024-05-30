@@ -82,6 +82,9 @@
                                 <li>
                                     <a href="{{ url('admin/photo_gallery') }}">Photo Gallery</a>
                                 </li>
+                                <li>
+                                    <a href="{{ url('admin/video_gallery') }}">Video Gallery</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

@@ -12,7 +12,7 @@ class PhotoGallery extends Model
     protected $guarded = [];
 
     /**
-     * Showing News image
+     * Showing Photos
      */
     public function getImg()
     {
