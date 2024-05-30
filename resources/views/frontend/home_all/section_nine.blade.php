@@ -17,83 +17,21 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-4764px, 0px, 0px); transition: all 1s ease 0s; width: 5558px;">
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 6 </a>
-                                        </h3>
+
+                            @php
+                                $photos = App\Models\PhotoGallery::latest()->get();
+                            @endphp
+                            @foreach ($photos as $photo)
+                                <div class="owl-item" style="width: 784px; margin-right: 10px;">
+                                    <div class="item">
+                                        <div class="photo">
+                                            <a class="themeGallery" href="{{ $photo->getImg() }}">
+                                                <img src="{{ $photo->getImg() }}" alt="PHOTO"></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 6 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 5 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 4 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 3 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 2 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 784px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="photo">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                        <h3 class="photoCaption">
-                                            <a href=" ">PHOTO GALLARY 1 </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i
@@ -112,158 +50,20 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transition: all 1s ease 0s; width: 2515px; transform: translate3d(-463px, 0px, 0px);">
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
+
+
+                            @foreach ($photos as $photo)
+                                <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
+                                    <div class="item">
+                                        <div class="phtot2">
+                                            <a class="themeGallery" href="{{ $photo->getImg() }}">
+                                                <img src="{{ $photo->getImg() }}" alt="PHOTO"></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active center" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 122.333px; margin-right: 10px;">
-                                <div class="item">
-                                    <div class="phtot2">
-                                        <a class="themeGallery" href="assets/images/6786.jpg">
-                                            <img src="assets/images/lazy.jpg" alt="PHOTO"></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                     <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span

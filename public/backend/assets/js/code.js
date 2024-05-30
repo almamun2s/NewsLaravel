@@ -27,10 +27,24 @@ $(function () {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('deleteForm');
+document.addEventListener('DOMContentLoaded', function () {
+    let formById = document.getElementById('deleteForm');
 
-    form.addEventListener('submit', function(event) {
+    if (formById != null) {
+        formById.addEventListener('submit', function (event) {
+            function_for_delete_notification(event, formById);
+        });
+    }
+
+    let formByClass = document.querySelectorAll('.deleteForm');
+    console.log(formByClass);
+    formByClass.forEach(form => {
+        form.addEventListener('submit', function (event) {
+            function_for_delete_notification(event, form);
+        });
+    });
+
+    function function_for_delete_notification(event, form) {
         event.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
@@ -45,5 +59,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 form.submit();
             }
         })
-    });
+    }
 });

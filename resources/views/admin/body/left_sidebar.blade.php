@@ -25,14 +25,14 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('admin.banner') }}">
-                        <i class="fa-solid fa-image"></i>
-                        <span>Banner</span>
-                    </a>
-                </li>
-
                 @if (auth()->user()->status == 'active')
+                    <li>
+                        <a href="{{ route('admin.banner') }}">
+                            <i class="fa-solid fa-image"></i>
+                            <span>Banner</span>
+                        </a>
+                    </li>
+
                     <li class="menu-title mt-2">Menu</li>
 
                     <li>
@@ -66,6 +66,21 @@
                                 </li>
                                 <li>
                                     <a href="{{ url('/admin/news_post/create') }}">Add News Post</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#gallery" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-photo-film"></i>
+                            <span class="material-icons-outlined">Gallery</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="gallery">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ url('admin/photo_gallery') }}">Photo Gallery</a>
                                 </li>
                             </ul>
                         </div>
