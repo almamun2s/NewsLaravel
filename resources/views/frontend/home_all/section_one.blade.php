@@ -103,32 +103,39 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-4">
-                <div class="live-item">
-                    <div class="live_title">
-                        <a href=" ">LIVE TV </a>
-                        <div class="themesBazar"></div>
-                    </div>
-                    <div class="popup-wrpp">
-                        <div class="live_image">
-                            <img width="700" height="400" src="assets/images/lazy.jpg"
-                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
-                                loading="lazy">
-                            <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
-                            </div>
+
+                @if ($live->isActive)
+                    <div class="live-item">
+                        <div class="live_title">
+                            <a href=" ">LIVE TV </a>
+                            <div class="themesBazar"></div>
                         </div>
-                        <div class="live-popup">
-                            <div id="mymodal" class="mfp-hide" role="dialog" aria-labelledby="modal-titles"
-                                aria-describedby="modal-contents">
-                                <div id="modal-contents">
-                                    <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
-                                        <iframe class="" src=" " allowfullscreen="allowfullscreen"
-                                            width="100%" height="400px"></iframe>
+                        <div class="popup-wrpp">
+                            <div class="live_image">
+                                <img width="700" height="400" src="{{ $live->getImg() }}"
+                                    class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""
+                                    loading="lazy">
+                                <div data-mfp-src="#mymodal" class="live-icon modal-live"> <i class="las la-play"></i>
+                                </div>
+                            </div>
+                            <div class="live-popup">
+                                <div id="mymodal" class="mfp-hide" role="dialog" aria-labelledby="modal-titles"
+                                    aria-describedby="modal-contents">
+                                    <div id="modal-contents">
+                                        <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
+                                            <iframe width="560" height="315" src="{{ $live->url }}"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen></iframe>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
+
                 <div class="themesBazar_widget">
                     <h3 style="margin-top:5px">{{ translateThis('Old News') }}</h3>
                 </div>
@@ -146,7 +153,8 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <div class="nav-link" id="popular-tab" data-bs-toggle="pill" data-bs-target="#popular"
-                                role="tab" aria-controls="popular" aria-selected="false">{{ translateThis('Popular') }}</div>
+                                role="tab" aria-controls="popular" aria-selected="false">
+                                {{ translateThis('Popular') }}</div>
                         </li>
                     </ul>
                 </div>
@@ -161,7 +169,8 @@
                                     <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                         class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(translateThis($news->title))->limit(40) }}</a></h4>
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(translateThis($news->title))->limit(40) }}</a>
+                                    </h4>
                                 </div>
                             @endforeach
 
@@ -178,7 +187,8 @@
                                     <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"
                                         class="tab-icon"><i class="la la-play"></i></a>
                                     <h4 class="tab_hadding"><a
-                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(translateThis($news->title))->limit(40) }}</a></h4>
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ str(translateThis($news->title))->limit(40) }}</a>
+                                    </h4>
                                 </div>
                             @endforeach
 

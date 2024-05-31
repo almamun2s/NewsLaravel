@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LiveTV;
 use DateTime;
 use App\Models\Category;
 use App\Models\NewsPost;
@@ -22,8 +23,9 @@ class IndexController extends Controller
         $sectionNine = NewsPost::where('status', 'publish')->where('section_nine', 1)->latest()->limit(9)->get();
         $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
         $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+        $live = LiveTV::find(1);
 
-        return view('frontend.home', compact(['topSliders', 'sectionThree', 'sectionNine', 'latestNews', 'popularNews']));
+        return view('frontend.home', compact(['topSliders', 'sectionThree', 'sectionNine', 'latestNews', 'popularNews', 'live']));
     }
 
     /**

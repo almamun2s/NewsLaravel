@@ -39,8 +39,8 @@ class VideoGalleryController extends Controller
         ], [
             'title.required' => 'Please provide your Video title',
             'title.min' => 'Video title should be minimum 10 charactors',
-            'utl.required'  => 'Please Provide Video URL',
-            'utl.url'  => 'Please Provide a valid Video URL',
+            'url.required'  => 'Please Provide Video URL',
+            'url.url'  => 'Please Provide a valid Video URL',
         ]);
 
         $img_name = null;

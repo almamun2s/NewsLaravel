@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Banner;
+use App\Models\LiveTV;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -39,7 +40,7 @@ class BannerController extends Controller
 
             $banner->image = $img_name;
             $banner->save();
-            
+
             $notification = array(
                 'message' => $banner->name . 'updated Successfully',
                 'alert-type' => 'success'
@@ -53,5 +54,60 @@ class BannerController extends Controller
             return redirect()->back()->with($notification);
         }
 
+    }
+
+
+    /**
+     * showing LiveTV edit page
+     */
+    public function livetv()
+    {
+        $video = LiveTV::findOrFail(1);
+
+        return view('admin.gallery.video.edit_live_tv', compact('video'));
+    }
+
+    /**
+     * Updating Live TV options
+     *
+     * @param Request $request
+     */
+    public function livetvUpdate(Request $request)
+    {
+        $video = LiveTV::findOrFail(1);
+
+        $request->validate([
+            'url' => 'required|url'
+        ], [
+            'url.required' => 'Please Provide Video URL',
+            'url.url' => 'Please Provide a valid Video URL',
+        ]);
+
+
+        if ($request->file('image')) {
+            if ($video->image != null) {
+                unlink(public_path('uploads/banner/' . $video->image));
+            }
+            $image = $request->file('image');
+            $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(784, 436)->save('uploads/banner/' . $img_name);
+
+            $video->image = $img_name;
+        }
+
+        $video->url = $request->url;
+        if ($request->live_status != null) {
+            $video->isActive = 1;
+        } else {
+            $video->isActive = 0;
+        }
+
+        $video->save();
+
+        $notification = array(
+            'message' => 'Video updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }

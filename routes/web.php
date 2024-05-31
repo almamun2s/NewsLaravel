@@ -96,6 +96,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         Route::get('/banner', [BannerController::class, 'show_banners'])->name('admin.banner');
         Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');
+        Route::get('/livetv', [BannerController::class, 'livetv'])->name('admin.livetv');
+        Route::put('/livetv', [BannerController::class, 'livetvUpdate'])->name('admin.livetvUpdate');
 
     });
     Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');

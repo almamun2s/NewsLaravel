@@ -85,6 +85,9 @@
                                 <li>
                                     <a href="{{ url('admin/video_gallery') }}">Video Gallery</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('admin.livetv') }}">Live TV</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
