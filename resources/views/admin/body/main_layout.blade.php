@@ -49,9 +49,12 @@
 
 <!-- body start -->
 
-<body data-layout-mode="default" data-theme="light" data-topbar-color="dark" data-menu-position="fixed"
-    data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='true'>
-
+<body data-layout-mode="default" data-theme="{{ auth()->user()->dark_mode == 1 ? 'dark' : 'light' }}"
+    data-topbar-color="{{ auth()->user()->top_bar_dark == 1 ? 'dark' : 'light' }}" data-menu-position="fixed"
+    data-leftbar-color="{{ auth()->user()->left_sidebar_color }}"
+    data-leftbar-size='{{ auth()->user()->left_sidebar_size }}'
+    data-sidebar-user='{{ auth()->user()->sidebar_user_info == 1 ? 'true' : 'false' }}'
+    data-layout-width="{{ auth()->user()->boxed_layout == 1 ? 'boxed' : 'fluid' }}">
     <!-- Begin page -->
     <div id="wrapper">
 

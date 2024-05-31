@@ -106,15 +106,14 @@
                             </ul>
                         </div>
                     </li>
-
-
-                    <li>
-                        <a href="{{ route('admin.web_settings') }}">
-                            <i class="fa-solid fa-gear"></i>
-                            <span>Website Settings</span>
-                        </a>
-                    </li>
                 @endif
+
+                <li>
+                    <a href="{{ route('admin.web_settings') }}">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Website Settings</span>
+                    </a>
+                </li>
             </ul>
 
         </div>

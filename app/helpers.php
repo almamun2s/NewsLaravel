@@ -29,7 +29,7 @@ if (!function_exists('trnaslatable')) {
     function translatable(): bool
     {
         $settings = Settings::findOrFail(1);
-        $translatable = $settings->translation;
+        $translatable = $settings->is_active;
 
         return $translatable;
     }

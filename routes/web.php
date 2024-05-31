@@ -97,9 +97,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/banner', [BannerController::class, 'show_banners'])->name('admin.banner');
         Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');
 
-        Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
-        Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
     });
+    Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
+    Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
+    Route::post('/web_settings_backend', [SettingsController::class, 'web_settings_backend'])->name('admin.web_settings_backend');
 
 
 });
