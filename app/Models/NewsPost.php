@@ -36,4 +36,8 @@ class NewsPost extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function comments(){
+        return $this->hasMany(NewsComment::class, 'id', 'news_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LiveTV;
+use App\Models\NewsComment;
 use DateTime;
 use App\Models\Category;
 use App\Models\NewsPost;
@@ -81,6 +82,7 @@ class IndexController extends Controller
     public function news_details(int $id, string $slug)
     {
         $news = NewsPost::findOrFail($id);
+        $comments = NewsComment::where('news_id', $id)->where('status', 1)->latest()->limit(5)->get();
         $relatedNews = NewsPost::where('status', 'publish')->where('category_id', $news->category_id)->where('id', '!=', $news->id)->limit(6)->get();
         $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
         $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
@@ -90,7 +92,7 @@ class IndexController extends Controller
             $news->increment('views');
             Session::put($newsKey, 1);
         }
-        return view('frontend.news.news_details', compact(['news', 'relatedNews', 'latestNews', 'popularNews']));
+        return view('frontend.news.news_details', compact(['news', 'comments', 'relatedNews', 'latestNews', 'popularNews']));
     }
 
     /**

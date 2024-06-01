@@ -55,4 +55,12 @@ class User extends Authenticatable
             return url('uploads/no_profile_pic.png');
         }
     }
+
+    public function news(){
+        return $this->hasMany(NewsPost::class, 'id', 'user_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(NewsComment::class, 'id', 'user_id');
+    }
 }

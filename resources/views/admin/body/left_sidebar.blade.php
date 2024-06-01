@@ -67,6 +67,9 @@
                                 <li>
                                     <a href="{{ url('/admin/news_post/create') }}">Add News Post</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('admin.news.comments') }}">Comments</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

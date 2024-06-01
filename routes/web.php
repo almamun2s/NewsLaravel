@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\NewsCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -44,6 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/profile/change_password', [AdminController::class, 'change_pwd'])->name('profile.change_pwd');
 
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    Route::post('/comment', [NewsCommentController::class, 'store_comment'])->name('comment');
+
 });
 
 require __DIR__ . '/auth.php';
@@ -98,6 +102,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');
         Route::get('/livetv', [BannerController::class, 'livetv'])->name('admin.livetv');
         Route::put('/livetv', [BannerController::class, 'livetvUpdate'])->name('admin.livetvUpdate');
+
+        Route::get('/news_comments', [NewsCommentController::class, 'news_comments' ])->name('admin.news.comments');
+        Route::get('/news_comments/{id}', [NewsCommentController::class, 'news_comments_approve' ])->name('admin.news.comments.approve');
+        Route::get('/news_comments/{id}/delete', [NewsCommentController::class, 'news_comments_delete' ])->name('admin.news.comments.delete');
 
     });
     Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
