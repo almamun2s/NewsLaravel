@@ -31,6 +31,7 @@ Route::get('/news/category/{id}/{slug}', [IndexController::class, 'category_news
 Route::get('/news/subcategory/{id}/{slug}', [IndexController::class, 'sub_category_news'])->name('sub_category_news');
 Route::get('/news/{id}/{slug}', [IndexController::class, 'news_details'])->name('news_details');
 Route::post('/search_by_date', [IndexController::class, 'search_by_date'])->name('search_by_date');
+Route::post('/search', [IndexController::class, 'search'])->name('search');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

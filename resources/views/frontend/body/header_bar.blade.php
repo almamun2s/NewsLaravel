@@ -26,8 +26,9 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3">
-                <form class="header-search" action=" " method="post">
-                    <input type="text" alue="" name="s" placeholder=" Search Here " required="">
+                <form class="header-search" action="{{ route('search') }}" method="post">
+                    @csrf
+                    <input type="text" name="search" placeholder=" Search Here " required autocomplete="off" value="{{ old('search')}}" >
                     <button type="submit" value="Search"> <i class="las la-search"></i> </button>
                 </form>
             </div>

@@ -123,4 +123,27 @@ class IndexController extends Controller
 
         return view('frontend.news.search_by_date', compact(['allNews', 'formatDate', 'latestNews', 'popularNews']));
     }
+
+
+    /**
+     * Search in website
+     * 
+     * @param Request $request
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required',
+        ]);
+
+        $search = $request->search;
+
+        $allNews = NewsPost::where('title', 'LIKE', "%$search%")->orWhere('details', 'LIKE', "%$search%")->limit(15)->get();
+        $formatDate = $search;
+        $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+
+        return view('frontend.news.search_by_date', compact(['allNews', 'formatDate', 'latestNews', 'popularNews']));
+
+    }
 }
