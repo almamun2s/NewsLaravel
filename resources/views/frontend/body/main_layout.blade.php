@@ -7,13 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    @use(App\Models\MetaData)
+    @php
+        $meta = MetaData::find(1);
+    @endphp
+
+    <meta name="title" content="{{ $meta->title }}">
+    <meta name="author" content="{{ $meta->author }}">
+    <meta name="keywords" content="{{ $meta->keywords }}">
+    <meta name="description" content="{{ $meta->description }}">
+
     <title>@yield('title') | Online News Portal </title>
 
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.gif') }}" type="image/x-icon">
 
-
-    <meta name="keywords" content="online newspaper, bangla news, news, bangla, newsportal">
-    <meta name="description" content="Popular News Paper of Bangladesh">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/line-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/headstyle.css') }}" />
@@ -45,8 +52,8 @@
     <link rel="stylesheet" id="newsflash-style-css" href="{{ asset('frontend/assets/css/style.css') }}" media="all">
     <link rel="stylesheet" id="common-themesbazar-css" href="{{ asset('frontend/assets/css/common-themesbazar.css') }}"
         media="all">
-    <link rel="stylesheet" id="newsflash-lineawesome-css" href="{{ asset('frontend/assets/css/line-awesome.min.css') }}"
-        media="all">
+    <link rel="stylesheet" id="newsflash-lineawesome-css"
+        href="{{ asset('frontend/assets/css/line-awesome.min.css') }}" media="all">
     <link rel="stylesheet" id="newsflash-stellarnav-css" href="{{ asset('frontend/assets/css/stellarnav.css') }}"
         media="all">
     <link rel="stylesheet" id="newsflash-jquery-css" href="{{ asset('frontend/assets/css/jquery-ui.css') }}"

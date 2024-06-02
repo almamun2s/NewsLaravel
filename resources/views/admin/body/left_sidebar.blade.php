@@ -112,6 +112,12 @@
                             </ul>
                         </div>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.web_meta_data') }}">
+                            <i class="fa-solid fa-database"></i>
+                            <span>Website Meta Data</span>
+                        </a>
+                    </li>
                 @endif
 
                 <li>

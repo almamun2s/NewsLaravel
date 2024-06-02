@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use App\Models\MetaData;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,6 +77,54 @@ class SettingsController extends Controller
         $user->save();
         $notification = array(
             'message' => 'Website Backend Settings Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+
+    /**
+     * Showing Website metadata edit page
+     */
+    public function web_meta_data()
+    {
+        $meta_data = MetaData::findOrFail(1);
+
+        return view('admin.settings.meta_data', compact('meta_data'));
+    }
+
+
+    /**
+     * Updating Website Meta Data
+     *
+     * @param Request $request
+     */
+    public function update_web_meta_data(Request $request)
+    {
+        $meta_data = MetaData::findOrFail(1);
+
+        $request->validate([
+            'title' => 'required|min:10',
+            'author' => 'required',
+            'keywords' => 'required',
+            'description' => 'required|min:20',
+        ], [
+            'title.required' => 'Please provide your meta title',
+            'title.min' => 'Meta title should be minimum 10 charactors',
+            'keywords.required' => 'At least one keyword should be provided',
+            'author.required' => 'Please Provide an author name',
+            'description.required' => 'Please provide your meta description',
+            'description.min' => 'Meta details should be minimum 20 charactor',
+        ]);
+        $meta_data->title = $request->title;
+        $meta_data->author = $request->author;
+        $meta_data->keywords = $request->keywords;
+        $meta_data->description = $request->description;
+
+        $meta_data->save();
+
+        $notification = array(
+            'message' => 'Website Meta Data Updated Successfully',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);

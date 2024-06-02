@@ -107,6 +107,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/news_comments/{id}', [NewsCommentController::class, 'news_comments_approve' ])->name('admin.news.comments.approve');
         Route::get('/news_comments/{id}/delete', [NewsCommentController::class, 'news_comments_delete' ])->name('admin.news.comments.delete');
 
+        Route::get('/web_meta_data', [SettingsController::class, 'web_meta_data'])->name('admin.web_meta_data');
+        Route::post('/web_meta_data', [SettingsController::class, 'update_web_meta_data'])->name('admin.update_web_meta_data');
     });
     Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
     Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
