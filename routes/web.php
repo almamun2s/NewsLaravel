@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Frontend\NewsCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -119,5 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
         // Permissions Routes
         Route::resource('/permissions', PermissionController::class);
+        // Roles Routes
+        Route::resource('/roles', RoleController::class);
     });
 });

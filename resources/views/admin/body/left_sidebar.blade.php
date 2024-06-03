@@ -114,10 +114,21 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('/admin/permissions') }}">
+                        <a href="#rolesAndPermissions" data-bs-toggle="collapse">
                             <i class="fa-solid fa-key"></i>
-                            <span>Roles and Permissions</span>
+                            <span>Role and Permission</span>
+                            <span class="menu-arrow"></span>
                         </a>
+                        <div class="collapse" id="rolesAndPermissions">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ url('/admin/permissions') }}">Permissions</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/admin/roles') }}">Roles</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li>
