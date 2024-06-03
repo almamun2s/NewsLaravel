@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LiveTV;
-use App\Models\NewsComment;
 use DateTime;
+use App\Models\User;
+use App\Models\LiveTV;
 use App\Models\Category;
 use App\Models\NewsPost;
+use App\Models\NewsComment;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -82,7 +83,6 @@ class IndexController extends Controller
     public function news_details(int $id, string $slug)
     {
         $news = NewsPost::findOrFail($id);
-        $comments = NewsComment::where('news_id', $id)->where('status', 1)->latest()->limit(5)->get();
         $relatedNews = NewsPost::where('status', 'publish')->where('category_id', $news->category_id)->where('id', '!=', $news->id)->limit(6)->get();
         $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
         $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
@@ -92,7 +92,7 @@ class IndexController extends Controller
             $news->increment('views');
             Session::put($newsKey, 1);
         }
-        return view('frontend.news.news_details', compact(['news', 'comments', 'relatedNews', 'latestNews', 'popularNews']));
+        return view('frontend.news.news_details', compact(['news', 'relatedNews', 'latestNews', 'popularNews']));
     }
 
     /**
@@ -144,6 +144,20 @@ class IndexController extends Controller
         $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
 
         return view('frontend.news.search_by_date', compact(['allNews', 'formatDate', 'latestNews', 'popularNews']));
+
+    }
+
+    public function search_by_reporter(int $id)
+    {
+        $user = User::findOrFail($id);
+
+        // $allNews = $user->news;
+
+        // $formatDate = $user->fname.' '.$user->lname ;
+        // $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
+        // $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
+
+        return view('frontend.news.admin_news', compact('user'));
 
     }
 }

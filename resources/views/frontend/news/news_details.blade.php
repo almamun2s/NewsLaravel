@@ -38,7 +38,9 @@
                             </div>
                         </div>
                         <div class="col-lg-11 col-md-10">
-                            <div class="reportar-title">{{ $news->user->fname }} {{ $news->user->lname }}</div>
+                            <div class="reportar-title"><a
+                                    href="{{ route('search_by_reporter', $news->user_id) }}">{{ $news->user->fname }}
+                                    {{ $news->user->lname }}</a></div>
                             <div class="viwe-count">
                                 <ul>
                                     <li><i class="la la-clock-o"></i>Posted {{ $news->created_at->format('l d M Y') }}
@@ -100,14 +102,14 @@
                         </a>
                     </div>
 
-                    @if (count($comments) != 0)
+                    @if (count($news->comments) != 0)
                         <div class="author2">
                             <div class="author-content2">
                                 <h6 class="author-caption2">
                                     <span> COMMENTS </span>
                                 </h6>
 
-                                @foreach ($comments as $comment)
+                                @foreach ($news->comments as $comment)
                                     <div class="p-2 overflow-hidden">
                                         <div class="author-image2">
                                             <img alt="" src="{{ $comment->user->getImg() }}"

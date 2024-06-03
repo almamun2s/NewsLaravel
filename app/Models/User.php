@@ -57,10 +57,10 @@ class User extends Authenticatable
     }
 
     public function news(){
-        return $this->hasMany(NewsPost::class, 'id', 'user_id');
+        return $this->hasMany(NewsPost::class, 'user_id', 'id');
     }
 
     public function comments(){
-        return $this->hasMany(NewsComment::class, 'id', 'user_id');
+        return $this->hasMany(NewsComment::class, 'user_id', 'id');
     }
 }

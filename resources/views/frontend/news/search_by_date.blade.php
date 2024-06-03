@@ -15,7 +15,7 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="rachive-info-cats">
                         <a href=" "><i class="las la-home"></i> </a> <i class="las la-chevron-right"></i> News of
-                        {{ $formatDate }}
+                        '{{ $formatDate }}' found {{ count($allNews) }}
                     </div>
 
 
