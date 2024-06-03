@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\LiveTV;
 use App\Models\Category;
 use App\Models\NewsPost;
-use App\Models\NewsComment;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -150,12 +149,6 @@ class IndexController extends Controller
     public function search_by_reporter(int $id)
     {
         $user = User::findOrFail($id);
-
-        // $allNews = $user->news;
-
-        // $formatDate = $user->fname.' '.$user->lname ;
-        // $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
-        // $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();
 
         return view('frontend.news.admin_news', compact('user'));
 

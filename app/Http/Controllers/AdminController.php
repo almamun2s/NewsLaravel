@@ -137,7 +137,8 @@ class AdminController extends Controller
     public function manage()
     {
         $admins = User::where('role', 'admin')->latest()->get();
-        return view('admin.manage.admins', compact('admins'));
+        $users = User::where('role', 'user')->latest()->get();
+        return view('admin.manage.admins', compact(['admins', 'users']));
     }
 
     /**

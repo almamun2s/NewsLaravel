@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Frontend\NewsCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -34,9 +35,6 @@ Route::post('/search_by_date', [IndexController::class, 'search_by_date'])->name
 Route::post('/search', [IndexController::class, 'search'])->name('search');
 Route::get('/reporter/{id}', [IndexController::class, 'search_by_reporter'])->name('search_by_reporter');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -57,7 +55,7 @@ require __DIR__ . '/auth.php';
 
 
 
-// Admin Routes 
+// =============================== Admin Routes ===============================
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
@@ -67,54 +65,59 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::post('/profile', [AdminController::class, 'store'])->name('admin.profile.store');
     Route::post('/change_password', [AdminController::class, 'change_pwd'])->name('admin.change_pwd');
 
+    // Admin setting Routes
+    Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
+    Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
+    Route::post('/web_settings_backend', [SettingsController::class, 'web_settings_backend'])->name('admin.web_settings_backend');
+
     Route::middleware('status:active')->group(function () { // Keeping all Routes in status:active middleware 
         Route::controller(CategoryController::class)->middleware('status:active')->group(function () {
             // Category Routes
             Route::get('/category', 'index')->name('admin.category');
             Route::post('/category', 'store')->name('admin.category');
-
             Route::get('/category/{id}/edit', 'edit')->name('category.edit');
             Route::post('/category/{id}/edit', 'update')->name('category.edit');
-
             Route::get('/category/{id}/delete', 'destroy')->name('category.delete');
 
             // Sub Category Routes
             Route::get('/subcategory', 'sub_index')->name('admin.sub_category');
             Route::post('/subcategory', 'sub_store')->name('admin.sub_category');
-
             Route::get('/subcategory/{id}/edit', 'sub_edit')->name('sub_category.edit');
             Route::post('/subcategory/{id}/edit', 'sub_update')->name('sub_category.edit');
-
             Route::get('/subcategory/{id}/delete', 'sub_destroy')->name('sub_category.delete');
-
             Route::get('/sub_category/ajax/{cat_id}', 'ajax_sub_cat');
         });
 
         Route::controller(AdminController::class)->group(function () {
+            // Manage Admin Routes
             Route::get('/manage', 'manage')->name('admin.manage');
             Route::get('/active/{id}', 'active')->name('admin.active');
             Route::get('/inactive/{id}', 'inactive')->name('admin.inactive');
         });
 
+        // Resoures Routes
         Route::resource('/news_post', NewsPostController::class);
         Route::resource('/photo_gallery', PhotoGalleryController::class);
         Route::resource('/video_gallery', VideoGalleryController::class);
 
+        // Banner Routes
         Route::get('/banner', [BannerController::class, 'show_banners'])->name('admin.banner');
         Route::post('/banner/{id}', [BannerController::class, 'update_banners'])->name('admin.update.banner');
+
+        // LiveTV Routes
         Route::get('/livetv', [BannerController::class, 'livetv'])->name('admin.livetv');
         Route::put('/livetv', [BannerController::class, 'livetvUpdate'])->name('admin.livetvUpdate');
 
-        Route::get('/news_comments', [NewsCommentController::class, 'news_comments' ])->name('admin.news.comments');
-        Route::get('/news_comments/{id}', [NewsCommentController::class, 'news_comments_approve' ])->name('admin.news.comments.approve');
-        Route::get('/news_comments/{id}/delete', [NewsCommentController::class, 'news_comments_delete' ])->name('admin.news.comments.delete');
+        // Comments manage Routes
+        Route::get('/news_comments', [NewsCommentController::class, 'news_comments'])->name('admin.news.comments');
+        Route::get('/news_comments/{id}', [NewsCommentController::class, 'news_comments_approve'])->name('admin.news.comments.approve');
+        Route::get('/news_comments/{id}/delete', [NewsCommentController::class, 'news_comments_delete'])->name('admin.news.comments.delete');
 
+        // Web Meta Data updating Routes 
         Route::get('/web_meta_data', [SettingsController::class, 'web_meta_data'])->name('admin.web_meta_data');
         Route::post('/web_meta_data', [SettingsController::class, 'update_web_meta_data'])->name('admin.update_web_meta_data');
+
+        // Permissions Routes
+        Route::resource('/permissions', PermissionController::class);
     });
-    Route::get('/web_settings', [SettingsController::class, 'index'])->name('admin.web_settings');
-    Route::post('/web_settings_trnslt', [SettingsController::class, 'web_settings_trnslt'])->name('admin.web_settings_trnslt');
-    Route::post('/web_settings_backend', [SettingsController::class, 'web_settings_backend'])->name('admin.web_settings_backend');
-
-
 });

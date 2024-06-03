@@ -112,6 +112,14 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li>
+                        <a href="{{ url('/admin/permissions') }}">
+                            <i class="fa-solid fa-key"></i>
+                            <span>Roles and Permissions</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="{{ route('admin.web_meta_data') }}">
                             <i class="fa-solid fa-database"></i>
