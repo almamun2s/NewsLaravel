@@ -64,11 +64,12 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>SL</th>
-                                        <th>Name</th>
+                                        <th>Roles Name</th>
+                                        <th>Permissions</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,6 +79,12 @@
                                         <tr>
                                             <td>{{ $key + 1 }} </td>
                                             <td>{{ $role->name }} </td>
+                                            <td>
+                                                @foreach ($role->permissions as $permission)
+                                                    <span class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                        style="display: inline-block;margin:5px;">{{ $permission->name }}</span>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <a href="{{ url("admin/roles/$role->id/edit") }}"
                                                     class="btn btn-warning rounded-pill waves-effect waves-light">Edit</a>

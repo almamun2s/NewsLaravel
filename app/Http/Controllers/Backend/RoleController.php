@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -63,8 +66,9 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
+        $permission_groups = User::getPermissionGroup();
 
-        return view('admin.manage.role.edit', compact('role'));
+        return view('admin.manage.role.edit', compact(['role', 'permission_groups']));
     }
 
     /**
@@ -106,5 +110,20 @@ class RoleController extends Controller
             'alert-type' => 'error'
         );
         return redirect('/admin/roles')->with($notification);
+    }
+
+    public function update_permissions(Request $request, int $id)
+    {
+        $role = Role::findOrFail($id);
+        $permissions = $request->permission;
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+        $notification = array(
+            'message' => 'Role Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }

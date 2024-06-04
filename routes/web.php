@@ -118,9 +118,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/web_meta_data', [SettingsController::class, 'web_meta_data'])->name('admin.web_meta_data');
         Route::post('/web_meta_data', [SettingsController::class, 'update_web_meta_data'])->name('admin.update_web_meta_data');
 
-        // Permissions Routes
-        Route::resource('/permissions', PermissionController::class);
-        // Roles Routes
-        Route::resource('/roles', RoleController::class);
+
+        Route::resource('/permissions', PermissionController::class);// Permissions Routes
+        Route::resource('/roles', RoleController::class);// Roles Routes
+        Route::put('/roles_permissions/{id}', [RoleController::class, 'update_permissions'])->name('admin.permission_update');
+        
     });
 });

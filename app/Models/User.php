@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -57,11 +58,32 @@ class User extends Authenticatable
         }
     }
 
-    public function news(){
+    public function news()
+    {
         return $this->hasMany(NewsPost::class, 'user_id', 'id');
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(NewsComment::class, 'user_id', 'id');
+    }
+
+    public static function getPermissionGroup()
+    {
+        return DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+    }
+    public static function getPermissionByGroup(string $gropupName)
+    {
+        return DB::table('permissions')->select('name', 'id')->where('group_name', $gropupName)->get();
+    }
+    
+    public static function roleHasPermissions($role, $permissions): bool
+    {
+        foreach ($permissions as $permission) {
+            if (!$role->hasPermissionTo($permission->name)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
