@@ -94,6 +94,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             Route::get('/manage', 'manage')->name('admin.manage');
             Route::get('/active/{id}', 'active')->name('admin.active');
             Route::get('/inactive/{id}', 'inactive')->name('admin.inactive');
+
+            Route::get('/user_manage', 'user_manage')->name('admin.user_manage');
+            Route::get('/make_admin/{id}', 'make_admin')->name('admin.make_admin');
+            Route::get('/make_user/{id}', 'make_user')->name('admin.make_user');
         });
 
         // Resoures Routes
@@ -122,6 +126,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::resource('/permissions', PermissionController::class);// Permissions Routes
         Route::resource('/roles', RoleController::class);// Roles Routes
         Route::put('/roles_permissions/{id}', [RoleController::class, 'update_permissions'])->name('admin.permission_update');
-        
+
     });
 });

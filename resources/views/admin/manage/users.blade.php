@@ -1,6 +1,6 @@
 @extends('admin.body.main_layout')
 
-@section('title', 'Manage Admins')
+@section('title', 'Manage Users')
 
 @section('content')
     <div class="content">
@@ -19,7 +19,7 @@
                                 <li class="breadcrumb-item active">Datatables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Manage Admins <span class="btn btn-success">{{ count($admins) }}</span> </h4>
+                        <h4 class="page-title">Manage Users <span class="btn btn-success">{{ count($users) }}</span> </h4>
                     </div>
                 </div>
             </div>
@@ -40,44 +40,25 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($admins as $key => $admin)
+                                    @foreach ($users as $key => $admin)
                                         <tr>
                                             <td>{{ $key + 1 }} </td>
-                                            <td><img src="{{ $admin->getImg() }}" alt="admin" width="50px"
+                                            <td><img src="{{ $admin->getImg() }}" alt="User" width="50px"
                                                     height="50px"> </td>
                                             <td>{{ $admin->fname }} {{ $admin->lname }} </td>
                                             <td>{{ $admin->username }} </td>
                                             <td>{{ $admin->email }} </td>
                                             <td>{{ $admin->phone }} </td>
                                             <td>
-                                                @if (auth()->user()->id == $admin->id)
-                                                    <span>This is you</span>
-                                                @else
-                                                    @if ($admin->status == 'active')
-                                                        <a href="{{ route('admin.inactive', $admin->id) }}"
-                                                            class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                            title="Make Inactive">Deactivate</a>
-                                                    @else
-                                                        <a href="{{ route('admin.active', $admin->id) }}"
-                                                            class="btn btn-primary rounded-pill waves-effect waves-light"
-                                                            title="Make Active">Activate</a>
-                                                    @endif
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if (auth()->user()->id == $admin->id)
-                                                    <span>This is you</span>
-                                                @else
-                                                    <a href="{{ route('admin.make_user', $admin->id) }}" id="delete"
-                                                        class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                        title="Make Inactive">Make Normal User</a>
-                                                @endif
+
+                                                <a href="{{ route('admin.make_admin', $admin->id) }}" id="make_admin"
+                                                    class="btn btn-primary rounded-pill waves-effect waves-light"
+                                                    title="Make Inactive">Make Admin</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -91,5 +72,6 @@
             <!-- end row-->
         </div> <!-- container -->
     </div> <!-- content -->
+
 
 @endsection

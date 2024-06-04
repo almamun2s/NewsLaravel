@@ -24,6 +24,29 @@ $(function () {
             }
         })
     });
+    $(document).on('click', '#make_admin', function (e) {
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Make this user Admin?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, make him/her!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = link
+                Swal.fire(
+                    'Made!',
+                    'The User is now Admin.',
+                    'success'
+                )
+            }
+        })
+    });
 });
 
 

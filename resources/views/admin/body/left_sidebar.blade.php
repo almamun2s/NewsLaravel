@@ -109,6 +109,9 @@
                                 <li>
                                     <a href="{{ route('admin.manage') }}">Manage Admins</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('admin.user_manage') }}">Manage Users</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

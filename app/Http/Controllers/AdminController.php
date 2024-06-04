@@ -137,8 +137,7 @@ class AdminController extends Controller
     public function manage()
     {
         $admins = User::where('role', 'admin')->latest()->get();
-        $users = User::where('role', 'user')->latest()->get();
-        return view('admin.manage.admins', compact(['admins', 'users']));
+        return view('admin.manage.admins', compact('admins'));
     }
 
     /**
@@ -184,6 +183,44 @@ class AdminController extends Controller
 
         $notification = array(
             'message' => 'Admin Deactived',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Showing User manage page
+     */
+    public function user_manage()
+    {
+        $users = User::where('role', 'user')->latest()->get();
+        return view('admin.manage.users', compact('users'));
+    }
+
+    public function make_admin(int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update(['role' => 'admin']);
+
+        $notification = array(
+            'message' => 'Admin Added',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function make_user(int $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->id == $id) {
+            abort(401);
+        }
+        $user->update(['role' => 'user']);
+
+        $notification = array(
+            'message' => 'Admin removed',
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
