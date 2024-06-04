@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -164,10 +165,10 @@ class AdminController extends Controller
         $admin->update(['status' => 'active']);
 
         $notification = array(
-            'message' => 'Admin Actived',
+            'message' => $admin->fname . ' activated',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('admin.manage')->with($notification);
     }
 
     /**
@@ -182,10 +183,10 @@ class AdminController extends Controller
         $admin->update(['status' => 'inactive']);
 
         $notification = array(
-            'message' => 'Admin Deactived',
+            'message' => $admin->fname . ' Deactivated',
             'alert-type' => 'error'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('admin.manage')->with($notification);
     }
 
     /**
@@ -197,6 +198,11 @@ class AdminController extends Controller
         return view('admin.manage.users', compact('users'));
     }
 
+    /**
+     * Making the user Admin
+     *
+     * @param integer $id
+     */
     public function make_admin(int $id)
     {
         $user = User::findOrFail($id);
@@ -204,12 +210,17 @@ class AdminController extends Controller
         $user->update(['role' => 'admin']);
 
         $notification = array(
-            'message' => 'Admin Added',
+            'message' => $user->fname . ' Added as an Admin User',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('admin.manage')->with($notification);
     }
 
+    /**
+     * Making the admin -> Admin
+     *
+     * @param integer $id
+     */
     public function make_user(int $id)
     {
         $user = User::findOrFail($id);
@@ -218,11 +229,37 @@ class AdminController extends Controller
             abort(401);
         }
         $user->update(['role' => 'user']);
+        $user->roles()->detach();
 
         $notification = array(
-            'message' => 'Admin removed',
+            'message' => $user->fname . ' removed from Admin User',
             'alert-type' => 'error'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('admin.manage')->with($notification);
+    }
+
+
+    public function admin_user_manage(int $id)
+    {
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+
+        return view('admin.manage.admin_user_manage', compact(['user', 'roles']));
+    }
+
+    public function admin_user_manage_update(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => $user->fname . ' assigned as ' . $request->roles,
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.manage')->with($notification);
     }
 }

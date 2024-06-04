@@ -98,6 +98,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
             Route::get('/user_manage', 'user_manage')->name('admin.user_manage');
             Route::get('/make_admin/{id}', 'make_admin')->name('admin.make_admin');
             Route::get('/make_user/{id}', 'make_user')->name('admin.make_user');
+
+            Route::get('/admin_user_manage/{id}', 'admin_user_manage')->name('admin.admin_user_manage');
+            Route::put('/admin_user_manage/{id}', 'admin_user_manage_update')->name('admin.admin_user_manage_update');
         });
 
         // Resoures Routes

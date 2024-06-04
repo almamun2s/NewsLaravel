@@ -41,6 +41,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Status</th>
+                                        <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -56,28 +57,27 @@
                                             <td>{{ $admin->email }} </td>
                                             <td>{{ $admin->phone }} </td>
                                             <td>
-                                                @if (auth()->user()->id == $admin->id)
-                                                    <span>This is you</span>
+                                                @if ($admin->status == 'active')
+                                                    <span class="btn btn-success waves-effect waves-light">Active</span>
                                                 @else
-                                                    @if ($admin->status == 'active')
-                                                        <a href="{{ route('admin.inactive', $admin->id) }}"
-                                                            class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                            title="Make Inactive">Deactivate</a>
-                                                    @else
-                                                        <a href="{{ route('admin.active', $admin->id) }}"
-                                                            class="btn btn-primary rounded-pill waves-effect waves-light"
-                                                            title="Make Active">Activate</a>
-                                                    @endif
+                                                    <span class="btn btn-danger waves-effect waves-light">Inactive</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                @if (auth()->user()->id == $admin->id)
+                                                @foreach ($admin->roles as $role)
+                                                    <span class="btn btn-primary waves-effect waves-light">{{ $role->name }} </span>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                {{-- @if (auth()->user()->id == $admin->id)
                                                     <span>This is you</span>
                                                 @else
-                                                    <a href="{{ route('admin.make_user', $admin->id) }}" id="delete"
-                                                        class="btn btn-danger rounded-pill waves-effect waves-light"
-                                                        title="Make Inactive">Make Normal User</a>
-                                                @endif
+                                                 
+                                                        @endif --}}
+                                                <a href="{{ route('admin.admin_user_manage', $admin->id) }}"
+                                                    class="btn btn-warning rounded-pill waves-effect waves-light"
+                                                    title="Make Inactive">Edit</a>
+
                                             </td>
                                         </tr>
                                     @endforeach
