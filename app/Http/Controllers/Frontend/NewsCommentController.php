@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\NewsPost;
 use App\Models\NewsComment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CommentNotification;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\DatabaseNotification;
 
 class NewsCommentController extends Controller
 {
@@ -40,6 +44,8 @@ class NewsCommentController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
+        $privilegedUsers = User::permission('news.comments')->get();
+        Notification::send($privilegedUsers, new CommentNotification($request));
         $notification = array(
             'message' => 'Comment Posted Successfully. Please wait to approve by an admin.',
             'alert-type' => 'success'
@@ -90,5 +96,43 @@ class NewsCommentController extends Controller
             'alert-type' => 'error'
         );
         return redirect()->back()->with($notification);
+    }
+
+    /**
+     * Marking a notification as read
+     *
+     * @param string $notificationId
+     */
+    public function notificationMarkAsRead(string $notificationId)
+    {
+        $notification = DatabaseNotification::find($notificationId);
+
+        if ($notification->read_at) {
+            $notify = [];
+        } else {
+            $notify = array(
+                'message' => 'Notification marked as read',
+                'alert-type' => 'info'
+            );
+
+        }
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+        return redirect()->route('admin.news.comments')->with($notify);
+    }
+
+    /**
+     * Marking all notification as read
+     */
+    public function allNotificationMarkAsRead()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+        $notify = array(
+            'message' => 'All Notification marked as read',
+            'alert-type' => 'info'
+        );
+        return redirect()->back()->with($notify);
     }
 }

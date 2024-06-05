@@ -120,6 +120,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         Route::get('/news_comments', [NewsCommentController::class, 'news_comments'])->name('admin.news.comments')->middleware('can:news.comments');
         Route::get('/news_comments/{id}', [NewsCommentController::class, 'news_comments_approve'])->name('admin.news.comments.approve')->middleware('can:news.comment.delete');
         Route::get('/news_comments/{id}/delete', [NewsCommentController::class, 'news_comments_delete'])->name('admin.news.comments.delete')->middleware('can:news.comment.delete');
+        Route::get('/notification/{id}', [NewsCommentController::class, 'notificationMarkAsRead'])->name('admin.notification');
+        Route::get('/notif_mark_read', [NewsCommentController::class, 'allNotificationMarkAsRead'])->name('admin.notification_all');
 
         // Web Meta Data updating Routes 
         Route::get('/web_meta_data', [SettingsController::class, 'web_meta_data'])->name('admin.web_meta_data')->middleware('can:meta.manage');
