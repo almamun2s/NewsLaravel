@@ -168,14 +168,19 @@
                                     </form>
                                 </div> <!-- end col -->
 
-                                <div class="col-lg-3">
-                                    <form action="{{ url("admin/news_post/$news->id") }}" method="post" id="deleteForm">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger rounded-pill waves-effect waves-light"
-                                            type="submit" value="Delete">
-                                    </form>
-                                </div>
+                                @if (auth()->user()->can('news.delete'))
+                                    <div class="col-lg-3">
+                                        <form action="{{ url("admin/news_post/$news->id") }}" method="post"
+                                            id="deleteForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger rounded-pill waves-effect waves-light"
+                                                type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                @endif
+
+
                             </div>
 
                             <!-- end row-->

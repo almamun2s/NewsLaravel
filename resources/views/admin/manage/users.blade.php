@@ -40,7 +40,10 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('admins.make'))
+                                            <th>Action</th>
+                                        @endif
+
                                     </tr>
                                 </thead>
 
@@ -54,12 +57,14 @@
                                             <td>{{ $admin->username }} </td>
                                             <td>{{ $admin->email }} </td>
                                             <td>{{ $admin->phone }} </td>
-                                            <td>
+                                            @if (auth()->user()->can('admins.make'))
+                                                <td>
 
-                                                <a href="{{ route('admin.make_admin', $admin->id) }}" id="make_admin"
-                                                    class="btn btn-primary rounded-pill waves-effect waves-light"
-                                                    title="Make Inactive">Make Admin</a>
-                                            </td>
+                                                    <a href="{{ route('admin.make_admin', $admin->id) }}" id="make_admin"
+                                                        class="btn btn-primary rounded-pill waves-effect waves-light"
+                                                        title="Make Inactive">Make Admin</a>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -59,18 +59,25 @@
                         @if ($user->role == 'admin')
 
                             <div class="col-lg-6 mt-3">
-                                @if ($user->status == 'active')
-                                    <a href="{{ route('admin.inactive', $user->id) }}"
-                                        class="btn btn-danger rounded-pill waves-effect waves-light"
-                                        title="Make Inactive">Deactivate</a>
-                                @else
-                                    <a href="{{ route('admin.active', $user->id) }}"
-                                        class="btn btn-primary rounded-pill waves-effect waves-light"
-                                        title="Make Active">Activate</a>
+                                @if (auth()->user()->id != $user->id)
+                                    @if (auth()->user()->can('admins.deactive'))
+                                        @if ($user->status == 'active')
+                                            <a href="{{ route('admin.inactive', $user->id) }}"
+                                                class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                title="Make Inactive">Deactivate</a>
+                                        @else
+                                            <a href="{{ route('admin.active', $user->id) }}"
+                                                class="btn btn-primary rounded-pill waves-effect waves-light"
+                                                title="Make Active">Activate</a>
+                                        @endif
+                                    @endif
+                                    @if (auth()->user()->can('admins.remove'))
+                                        <a href="{{ route('admin.make_user', $user->id) }}" id="delete"
+                                            class="btn btn-danger rounded-pill waves-effect waves-light"
+                                            title="Make Inactive">Make
+                                            Normal User</a>
+                                    @endif
                                 @endif
-                                <a href="{{ route('admin.make_user', $user->id) }}" id="delete"
-                                    class="btn btn-danger rounded-pill waves-effect waves-light" title="Make Inactive">Make
-                                    Normal User</a>
                             </div>
                         @endif
 

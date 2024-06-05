@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -13,6 +14,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('roles.permission')) {
+            abort(401);
+        }
         $permissions = Permission::all();
 
         return view('admin.manage.permission.index', compact('permissions'));
@@ -31,6 +35,9 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('roles.permission')) {
+            abort(401);
+        }
         $request->validate([
             'name' => 'required|min:3',
         ], [
@@ -63,6 +70,9 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::user()->can('roles.permission')) {
+            abort(401);
+        }
         $permission = Permission::findOrFail($id);
 
         return view('admin.manage.permission.edit', compact('permission'));
@@ -73,6 +83,9 @@ class PermissionController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('roles.permission')) {
+            abort(401);
+        }
         $permission = Permission::findOrFail($id);
 
         $request->validate([
@@ -99,6 +112,9 @@ class PermissionController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('roles.permission')) {
+            abort(401);
+        }
         $permission = Permission::findOrFail($id);
 
         $permission->delete();

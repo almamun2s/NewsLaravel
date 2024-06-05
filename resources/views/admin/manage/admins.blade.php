@@ -42,7 +42,10 @@
                                         <th>Phone</th>
                                         <th>Status</th>
                                         <th>Role</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('admins.edit'))
+                                            <th>Action</th>
+                                        @endif
+
                                     </tr>
                                 </thead>
 
@@ -65,20 +68,23 @@
                                             </td>
                                             <td>
                                                 @foreach ($admin->roles as $role)
-                                                    <span class="btn btn-primary waves-effect waves-light">{{ $role->name }} </span>
+                                                    <span
+                                                        class="btn btn-primary waves-effect waves-light">{{ $role->name }}
+                                                    </span>
                                                 @endforeach
                                             </td>
-                                            <td>
-                                                {{-- @if (auth()->user()->id == $admin->id)
-                                                    <span>This is you</span>
-                                                @else
-                                                 
-                                                        @endif --}}
-                                                <a href="{{ route('admin.admin_user_manage', $admin->id) }}"
-                                                    class="btn btn-warning rounded-pill waves-effect waves-light"
-                                                    title="Make Inactive">Edit</a>
+                                            @if (auth()->user()->can('admins.edit'))
+                                                <td>
+                                                    @if (auth()->user()->id == $admin->id)
+                                                        <span>This is you</span>
+                                                    @else
+                                                        <a href="{{ route('admin.admin_user_manage', $admin->id) }}"
+                                                            class="btn btn-warning rounded-pill waves-effect waves-light"
+                                                            title="Make Inactive">Edit</a>
+                                                    @endif
 
-                                            </td>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

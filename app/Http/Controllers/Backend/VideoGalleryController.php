@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\VideoGallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class VideoGalleryController extends Controller
@@ -15,6 +16,10 @@ class VideoGalleryController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('gallery.video.show')) {
+            abort(401);
+        }
+
         $videos = VideoGallery::latest()->get();
 
         return view('admin.gallery.video.index', compact('videos'));
@@ -33,18 +38,23 @@ class VideoGalleryController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('gallery.video.add')) {
+            abort(401);
+        }
+
+
         $request->validate([
             'title' => 'required|min:10',
             'url' => 'required|url',
         ], [
             'title.required' => 'Please provide your Video title',
             'title.min' => 'Video title should be minimum 10 charactors',
-            'url.required'  => 'Please Provide Video URL',
-            'url.url'  => 'Please Provide a valid Video URL',
+            'url.required' => 'Please Provide Video URL',
+            'url.url' => 'Please Provide a valid Video URL',
         ]);
 
         $img_name = null;
-        
+
         if ($request->file('image')) {
             $image = $request->file('image');
             $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
@@ -77,6 +87,9 @@ class VideoGalleryController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::user()->can('gallery.video.edit')) {
+            abort(401);
+        }
         $video = VideoGallery::findOrFail($id);
 
         return view('admin.gallery.video.edit', compact('video'));
@@ -87,6 +100,9 @@ class VideoGalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::user()->can('gallery.video.edit')) {
+            abort(401);
+        }
         $video = VideoGallery::findOrFail($id);
 
         $request->validate([
@@ -95,11 +111,11 @@ class VideoGalleryController extends Controller
         ], [
             'title.required' => 'Please provide your Video title',
             'title.min' => 'Video title should be minimum 10 charactors',
-            'utl.required'  => 'Please Provide Video URL',
-            'utl.url'  => 'Please Provide a valid Video URL',
+            'utl.required' => 'Please Provide Video URL',
+            'utl.url' => 'Please Provide a valid Video URL',
         ]);
 
-        
+
         if ($request->file('image')) {
             if ($video->image != null) {
                 unlink(public_path('uploads/gallery/videos/' . $video->image));
@@ -129,6 +145,10 @@ class VideoGalleryController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::user()->can('gallery.video.delete')) {
+            abort(401);
+        }
+
         $video = VideoGallery::findOrFail($id);
 
         if ($video->image != null) {

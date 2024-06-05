@@ -68,17 +68,21 @@
                             </form>
 
                             <!-- end row-->
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <form action="{{ url("admin/video_gallery/$video->id") }}" method="post"
-                                        id="deleteForm">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="mt-3 btn btn-outline-danger rounded-pill waves-effect waves-light"
-                                            type="submit"  value="Delete">
-                                    </form>
+                            @if (auth()->user()->can('gallery.video.delete'))
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <form action="{{ url("admin/video_gallery/$video->id") }}" method="post"
+                                            id="deleteForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="mt-3 btn btn-outline-danger rounded-pill waves-effect waves-light"
+                                                type="submit" value="Delete">
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
+
+
                         </div> <!-- end card-body -->
 
 

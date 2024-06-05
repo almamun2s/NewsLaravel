@@ -51,14 +51,16 @@
                                     </form>
                                 </div> <!-- end col -->
 
-                                <div class="col-lg-3">
-                                    <form action="{{ url("admin/roles/$role->id") }}" method="post" id="deleteForm">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger rounded-pill waves-effect waves-light"
-                                            type="submit" value="Delete">
-                                    </form>
-                                </div>
+                                @if (auth()->user()->can('roles.delete'))
+                                    <div class="col-lg-3">
+                                        <form action="{{ url("admin/roles/$role->id") }}" method="post" id="deleteForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger rounded-pill waves-effect waves-light"
+                                                type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- end row-->

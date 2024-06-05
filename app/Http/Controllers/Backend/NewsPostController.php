@@ -18,6 +18,9 @@ class NewsPostController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('news.show')) {
+            abort(401);
+        }
         $allNews = NewsPost::latest()->get();
 
         return view('admin.news.index', compact('allNews'));
@@ -28,6 +31,9 @@ class NewsPostController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('news.add')) {
+            abort(401);
+        }
         $categories = Category::get();
 
         return view('admin.news.create', compact('categories'));
@@ -38,6 +44,9 @@ class NewsPostController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('news.add')) {
+            abort(401);
+        }
         if (empty($request->category_id)) {
             return redirect()->back()->withErrors(['category' => 'Please Select a Category']);
         }
@@ -54,7 +63,7 @@ class NewsPostController extends Controller
         ]);
 
         $img_name = null;
-        
+
         if ($request->file('image')) {
             $image = $request->file('image');
             $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
@@ -100,6 +109,9 @@ class NewsPostController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::user()->can('news.edit')) {
+            abort(401);
+        }
         $news = NewsPost::findOrFail($id);
         $categories = Category::get();
         $sub_categories = SubCategory::where('category_id', $news->category_id)->get();
@@ -112,6 +124,9 @@ class NewsPostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Auth::user()->can('news.edit')) {
+            abort(401);
+        }
         $news = NewsPost::findOrFail($id);
 
         if (empty($request->category_id)) {
@@ -165,6 +180,9 @@ class NewsPostController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::user()->can('news.delete')) {
+            abort(401);
+        }
         $news = NewsPost::findOrFail($id);
 
         if ($news->image != null) {

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\PhotoGallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class PhotoGalleryController extends Controller
@@ -15,7 +16,10 @@ class PhotoGalleryController extends Controller
      */
     public function index()
     {
-
+        if (!Auth::user()->can('gallery.photo.show')) {
+            abort(401);
+        }
+        
         $photos = PhotoGallery::latest()->get();
         return view('admin.gallery.photo.index', compact('photos'));
     }
@@ -33,6 +37,11 @@ class PhotoGalleryController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('gallery.photo.add')) {
+            abort(401);
+        }
+
+
         $images = $request->file('image');
 
         foreach ($images as $image) {
@@ -81,6 +90,9 @@ class PhotoGalleryController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Auth::user()->can('gallery.photo.delete')) {
+            abort(401);
+        }
         $photo = PhotoGallery::findOrFail($id);
 
         if ($photo->image != null) {

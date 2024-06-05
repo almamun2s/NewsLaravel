@@ -25,38 +25,40 @@
             </div>
             <!-- end page title -->
 
+            @if (auth()->user()->can('category.add'))
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">Add Category</h4>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Add Category</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <form action="{{ route('admin.category') }}" id="myForm" method="post">
+                                            @csrf
+                                            <div class="form-group mb-3">
+                                                <label for="simpleinput" class="form-label">Category Name</label>
+                                                <input type="text" name="category_name" autocomplete="off"
+                                                    class="form-control">
+                                                @error('category_name')
+                                                    <span class="text-danger">{{ $message }} </span>
+                                                @enderror
+                                            </div>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Add
+                                                Category
+                                            </button>
+                                        </form>
+                                    </div> <!-- end col -->
+                                </div>
 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form action="{{ route('admin.category') }}" id="myForm" method="post">
-                                        @csrf
-                                        <div class="form-group mb-3">
-                                            <label for="simpleinput" class="form-label">Category Name</label>
-                                            <input type="text" name="category_name" autocomplete="off"
-                                                class="form-control">
-                                            @error('category_name')
-                                                <span class="text-danger">{{ $message }} </span>
-                                            @enderror
-                                        </div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add Category
-                                        </button>
-                                    </form>
-                                </div> <!-- end col -->
-                            </div>
+                                <!-- end row-->
 
-                            <!-- end row-->
-
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card -->
-                </div><!-- end col -->
-            </div>
-            <!-- end row -->
+                            </div> <!-- end card-body -->
+                        </div> <!-- end card -->
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+            @endif
 
             <div class="row">
                 <div class="col-12">
@@ -69,7 +71,9 @@
                                         <th>SL</th>
                                         <th>Name</th>
                                         <th>Slug</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('category.edit') || auth()->user()->can('category.delete'))
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -80,10 +84,16 @@
                                             <td>{{ $category->name }} </td>
                                             <td>{{ $category->slug }} </td>
                                             <td>
-                                                <a href="{{ route('category.edit', $category->id) }}"
-                                                    class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
-                                                <a href="{{ route('category.delete', $category->id) }}"
-                                                    class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                                @if (auth()->user()->can('category.edit'))
+                                                    <a href="{{ route('category.edit', $category->id) }}"
+                                                        class="btn btn-primary rounded-pill waves-effect waves-light">Edit</a>
+                                                @endif
+                                                @if (auth()->user()->can('category.delete'))
+                                                    <a href="{{ route('category.delete', $category->id) }}"
+                                                        class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                        id="delete">Delete</a>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach

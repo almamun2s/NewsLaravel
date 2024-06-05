@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -16,6 +17,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->can('roles.show')) {
+            abort(401);
+        }
         $roles = Role::all();
 
         return view('admin.manage.role.index', compact('roles'));
@@ -34,6 +38,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::user()->can('roles.add')) {
+            abort(401);
+        }
+
         $request->validate([
             'name' => 'required|min:3',
         ], [
@@ -65,6 +73,9 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Auth::user()->can('roles.edit')) {
+            abort(401);
+        }
         $role = Role::findOrFail($id);
         $permission_groups = User::getPermissionGroup();
 
@@ -76,6 +87,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!Auth::user()->can('roles.edit')) {
+            abort(401);
+        }
         $role = Role::findOrFail($id);
 
         $request->validate([
@@ -101,6 +115,10 @@ class RoleController extends Controller
      */
     public function destroy(int $id)
     {
+        if (!Auth::user()->can('roles.delete')) {
+            abort(401);
+        }
+
         $role = Role::findOrFail($id);
 
         $role->delete();
@@ -114,6 +132,9 @@ class RoleController extends Controller
 
     public function update_permissions(Request $request, int $id)
     {
+        if (!Auth::user()->can('roles.edit')) {
+            abort(401);
+        }
         $role = Role::findOrFail($id);
         $permissions = $request->permission;
 

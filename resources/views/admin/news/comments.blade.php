@@ -39,7 +39,10 @@
                                         <th>Commented by</th>
                                         <th>Comment</th>
                                         <th>Commented at</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('news.comment.delete'))
+                                            <th>Action</th>
+                                        @endif
+
                                     </tr>
                                 </thead>
 
@@ -54,12 +57,15 @@
                                                 <td>{{ $comment->user->fname }} {{ $comment->user->lname }} </td>
                                                 <td>{{ $comment->text }} </td>
                                                 <td>{{ $comment->created_at->diffForHumans() }} </td>
-                                                <td>
-                                                    <a href="{{ route('admin.news.comments.approve', $comment->id) }}"
-                                                        class="btn btn-success rounded-pill waves-effect waves-light">Approve</a>
-                                                    <a href="{{ route('admin.news.comments.delete', $comment->id) }}" id="delete"
-                                                        class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
-                                                </td>
+                                                @if (auth()->user()->can('news.comment.delete'))
+                                                    <td>
+                                                        <a href="{{ route('admin.news.comments.approve', $comment->id) }}"
+                                                            class="btn btn-success rounded-pill waves-effect waves-light">Approve</a>
+                                                        <a href="{{ route('admin.news.comments.delete', $comment->id) }}"
+                                                            id="delete"
+                                                            class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endif
                                     @endforeach
@@ -86,7 +92,10 @@
                                         <th>Commented by</th>
                                         <th>Comment</th>
                                         <th>Commented at</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('news.comment.delete'))
+                                            <th>Action</th>
+                                        @endif
+
                                     </tr>
                                 </thead>
 
@@ -95,16 +104,21 @@
                                         @if ($comment->status == 1)
                                             <tr>
                                                 <td>{{ $key + 1 }} </td>
-                                                <td><img src="{{ $comment->news->getImg() }}" alt="" width="75px">
+                                                <td><img src="{{ $comment->news->getImg() }}" alt=""
+                                                        width="75px">
                                                 </td>
                                                 <td>{{ str($comment->news->title)->limit(20) }} </td>
                                                 <td>{{ $comment->user->fname }} {{ $comment->user->lname }} </td>
                                                 <td>{{ $comment->text }} </td>
                                                 <td>{{ $comment->created_at->diffForHumans() }} </td>
-                                                <td>
-                                                    <a href="{{ route('admin.news.comments.delete', $comment->id) }}" id="delete"
-                                                        class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
-                                                </td>
+                                                @if (auth()->user()->can('news.comment.delete'))
+                                                    <td>
+                                                        <a href="{{ route('admin.news.comments.delete', $comment->id) }}"
+                                                            id="delete"
+                                                            class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
+                                                    </td>
+                                                @endif
+
                                             </tr>
                                         @endif
                                     @endforeach

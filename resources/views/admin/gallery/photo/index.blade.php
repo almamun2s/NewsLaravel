@@ -26,34 +26,36 @@
             <!-- end page title -->
 
 
+            @if (auth()->user()->can('gallery.photo.add'))
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <form action="{{ url('admin/photo_gallery') }}" id="myForm" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="form-group mb-3">
+                                                <label for="simpleinput" class="form-label">Add Photos</label>
+                                                <input type="file" name="image[]" id="multiImg" multiple
+                                                    class="form-control">
+                                                <div id="preview_img"></div>
+                                            </div>
+                                            <button type="submit"
+                                                class="btn btn-primary waves-effect waves-light">Add</button>
+                                        </form>
+                                    </div> <!-- end col -->
+                                </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form action="{{ url('admin/photo_gallery') }}" id="myForm" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group mb-3">
-                                            <label for="simpleinput" class="form-label">Add Photos</label>
-                                            <input type="file" name="image[]" id="multiImg" multiple
-                                                class="form-control">
-                                            <div id="preview_img"></div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Add</button>
-                                    </form>
-                                </div> <!-- end col -->
-                            </div>
+                                <!-- end row-->
 
-                            <!-- end row-->
-
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card -->
-                </div><!-- end col -->
-            </div>
-            <!-- end row -->
+                            </div> <!-- end card-body -->
+                        </div> <!-- end card -->
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+            @endif
 
             <div class="row">
                 <div class="col-12">
@@ -66,7 +68,9 @@
                                         <th>SL</th>
                                         <th>Photo</th>
                                         <th>Uploaded</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('gallery.photo.delete'))
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -76,16 +80,19 @@
                                             <td>{{ $key + 1 }} </td>
                                             <td><img src="{{ $photo->getImg() }}" alt="" width="75px"> </td>
                                             <td>{{ $photo->created_at->diffForHumans() }} </td>
-                                            <td>
-                                                <form action="{{ url("admin/photo_gallery/$photo->id") }}"
-                                                    method="post" class="deleteForm">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input
-                                                        class="btn btn-outline-danger rounded-pill waves-effect waves-light"
-                                                        type="submit" value="Delete">
-                                                </form>
-                                            </td>
+                                            @if (auth()->user()->can('gallery.photo.delete'))
+                                                <td>
+                                                    <form action="{{ url("admin/photo_gallery/$photo->id") }}"
+                                                        method="post" class="deleteForm">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input
+                                                            class="btn btn-outline-danger rounded-pill waves-effect waves-light"
+                                                            type="submit" value="Delete">
+                                                    </form>
+                                                </td>
+                                            @endif
+
                                         </tr>
                                     @endforeach
                                 </tbody>

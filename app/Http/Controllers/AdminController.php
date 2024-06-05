@@ -149,7 +149,7 @@ class AdminController extends Controller
     private function check_admin(int $id)
     {
         if (Auth::user()->id == $id) {
-            abort(404);
+            abort(401);
         }
     }
 
@@ -224,10 +224,8 @@ class AdminController extends Controller
     public function make_user(int $id)
     {
         $user = User::findOrFail($id);
+        $this->check_admin($id);
 
-        if (Auth::user()->id == $id) {
-            abort(401);
-        }
         $user->update(['role' => 'user']);
         $user->roles()->detach();
 
@@ -250,6 +248,7 @@ class AdminController extends Controller
     public function admin_user_manage_update(Request $request, int $id)
     {
         $user = User::findOrFail($id);
+        $this->check_admin($id);
 
         $user->roles()->detach();
         if ($request->roles) {

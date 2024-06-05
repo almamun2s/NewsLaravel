@@ -3,7 +3,7 @@
 @section('title', 'News Posts')
 @php
     $activeNews = App\Models\NewsPost::where('status', 'publish')->get();
-    $breakingNews = App\Models\NewsPost::where('breaking_news', 1 )->get();
+    $breakingNews = App\Models\NewsPost::where('breaking_news', 1)->get();
 @endphp
 @section('content')
     <div class="content">
@@ -40,7 +40,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ count($allNews) }}</span>
+                                        <h3 class="text-dark mt-1"><span
+                                                data-plugin="counterup">{{ count($allNews) }}</span>
                                         </h3>
                                         <p class="text-muted mb-1 text-truncate">Total News Posted </p>
                                     </div>
@@ -61,7 +62,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ count($activeNews) }}</span>
+                                        <h3 class="text-dark mt-1"><span
+                                                data-plugin="counterup">{{ count($activeNews) }}</span>
                                         </h3>
                                         <p class="text-muted mb-1 text-truncate">Active News</p>
                                     </div>
@@ -82,7 +84,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup"> {{ count($allNews) - count($activeNews) }} </span>
+                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">
+                                                {{ count($allNews) - count($activeNews) }} </span>
                                         </h3>
                                         <p class="text-muted mb-1 text-truncate">Inactive News</p>
                                     </div>
@@ -103,7 +106,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ count($breakingNews) }}</span>
+                                        <h3 class="text-dark mt-1"><span
+                                                data-plugin="counterup">{{ count($breakingNews) }}</span>
                                         </h3>
                                         <p class="text-muted mb-1 text-truncate">Breaking News</p>
                                     </div>
@@ -130,7 +134,9 @@
                                         <th>Author</th>
                                         <th>Published</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        @if (auth()->user()->can('news.edit'))
+                                            <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -152,10 +158,13 @@
                                                     <span class="btn btn-danger waves-effect waves-light">Archived</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <a href="{{ url("/admin/news_post/$news->id/edit") }}" title="Edit News"
-                                                    class="btn btn-warning rounded-pill waves-effect waves-light">Edit</a>
-                                            </td>
+                                            @if (auth()->user()->can('news.edit'))
+                                                <td>
+                                                    <a href="{{ url("/admin/news_post/$news->id/edit") }}"
+                                                        title="Edit News"
+                                                        class="btn btn-warning rounded-pill waves-effect waves-light">Edit</a>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
