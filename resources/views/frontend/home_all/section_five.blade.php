@@ -25,98 +25,126 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4">
-
-                <h2 class="themesBazar_cat01"> <a href=" "> BIZ-ECON </a> <span> <a href=" "> More
+                @php
+                    $category = App\Models\Category::skip(2)->first();
+                @endphp
+                <h2 class="themesBazar_cat01"> <a
+                        href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">{{ $category->name }}</a>
+                    <span> <a href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">
+                            More
                             <i class="las la-arrow-circle-right"></i> </a></span>
                 </h2>
 
                 <div class="white-bg">
-                    <div class="secFive-image">
-                        <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                        <div class="secFive-title">
-                            <a href=" ">Recovering money from selling rights</a>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">Recovering money from selling rights</a>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">Recovering money from selling rights</a>
-                            </h5>
-                        </div>
-                    </div>
+                    @foreach ($category->news as $key => $news)
+                        @if ($key == 0)
+                            <div class="secFive-image">
+                                <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                        class="lazyload" src="{{ $news->getImg() }}"></a>
+                                <div class="secFive-title">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                        @if ($key > 0 && $key < 3)
+                            <div class="secFive-smallItem">
+                                <div class="secFive-smallImg">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                            class="lazyload" src="{{ $news->getImg() }}"></a>
+                                    <h5 class="secFive_title2">
+                                        <a
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
-
-                <h2 class="themesBazar_cat01"> <a href=" "> INTERNATIONAL </a> <span> <a href=" ">More <i
-                                class="las la-arrow-circle-right"></i> </a></span>
-                </h2>
-
-                <div class="white-bg">
-                    <div class="secFive-image">
-                        <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                        <div class="secFive-title">
-                            <a href=" ">How important are box office numbers</a>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">How important are box office numbers</a>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">How important are box office numbers</a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4">
-
-                <h2 class="themesBazar_cat01"> <a href=" "> SPORTS </a> <span> <a href=" "> More
+                @php
+                    $category = App\Models\Category::skip(6)->first();
+                @endphp
+                <h2 class="themesBazar_cat01"> <a
+                        href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">{{ $category->name }}</a>
+                    <span> <a href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">
+                            More
                             <i class="las la-arrow-circle-right"></i> </a></span>
                 </h2>
 
                 <div class="white-bg">
-                    <div class="secFive-image">
-                        <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                        <div class="secFive-title">
-                            <a href=" ">Britney Spears says "I don't believe in God anymore" </a>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">Britney Spears says "I don't believe in God anymore"
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="secFive-smallItem">
-                        <div class="secFive-smallImg">
-                            <a href=" "><img class="lazyload" src="assets/images/lazy.jpg"></a>
-                            <h5 class="secFive_title2">
-                                <a href=" ">Britney Spears says "I don't believe in God anymore"
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
+                    @foreach ($category->news as $key => $news)
+                        @if ($key == 0)
+                            <div class="secFive-image">
+                                <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                        class="lazyload" src="{{ $news->getImg() }}"></a>
+                                <div class="secFive-title">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                        @if ($key > 0 && $key < 3)
+                            <div class="secFive-smallItem">
+                                <div class="secFive-smallImg">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                            class="lazyload" src="{{ $news->getImg() }}"></a>
+                                    <h5 class="secFive_title2">
+                                        <a
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                @php
+                    $category = App\Models\Category::skip(7)->first();
+                @endphp
+                <h2 class="themesBazar_cat01"> <a
+                        href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">{{ $category->name }}</a>
+                    <span> <a href="{{ route('category_news', ['id' => $category->id, 'slug' => $category->slug]) }}">
+                            More
+                            <i class="las la-arrow-circle-right"></i> </a></span>
+                </h2>
+
+                <div class="white-bg">
+                    @foreach ($category->news as $key => $news)
+                        @if ($key == 0)
+                            <div class="secFive-image">
+                                <a href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                        class="lazyload" src="{{ $news->getImg() }}"></a>
+                                <div class="secFive-title">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                        @if ($key > 0 && $key < 3)
+                            <div class="secFive-smallItem">
+                                <div class="secFive-smallImg">
+                                    <a
+                                        href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}"><img
+                                            class="lazyload" src="{{ $news->getImg() }}"></a>
+                                    <h5 class="secFive_title2">
+                                        <a
+                                            href="{{ route('news_details', ['id' => $news->id, 'slug' => $news->title_slug]) }}">{{ $news->title }}
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>

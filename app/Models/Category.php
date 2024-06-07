@@ -10,7 +10,13 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function subCategories(){
+    public function subCategories()
+    {
         return $this->hasMany(SubCategory::class);
+    }
+
+    public function news()
+    {
+        return $this->hasMany(NewsPost::class, 'category_id', 'id')->where('status', 'publish')->latest()->limit(8);
     }
 }

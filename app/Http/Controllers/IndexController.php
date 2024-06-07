@@ -137,7 +137,7 @@ class IndexController extends Controller
 
         $search = $request->search;
 
-        $allNews = NewsPost::where('title', 'LIKE', "%$search%")->orWhere('details', 'LIKE', "%$search%")->limit(15)->get();
+        $allNews = NewsPost::where('title', 'LIKE', "%$search%")->orWhere('details', 'LIKE', "%$search%")->orWhere('tags', 'LIKE', "%$search%")->limit(15)->get();
         $formatDate = $search;
         $latestNews = NewsPost::where('status', 'publish')->latest()->limit(10)->get();
         $popularNews = NewsPost::where('status', 'publish')->orderBy('views', 'DESC')->limit(10)->get();

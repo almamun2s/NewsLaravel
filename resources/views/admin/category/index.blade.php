@@ -71,6 +71,7 @@
                                         <th>SL</th>
                                         <th>Name</th>
                                         <th>Slug</th>
+                                        <th>News Count</th>
                                         @if (auth()->user()->can('category.edit') || auth()->user()->can('category.delete'))
                                             <th>Action</th>
                                         @endif
@@ -83,6 +84,7 @@
                                             <td>{{ $key + 1 }} </td>
                                             <td>{{ $category->name }} </td>
                                             <td>{{ $category->slug }} </td>
+                                            <td>{{ count($category->news) }} </td>
                                             <td>
                                                 @if (auth()->user()->can('category.edit'))
                                                     <a href="{{ route('category.edit', $category->id) }}"
