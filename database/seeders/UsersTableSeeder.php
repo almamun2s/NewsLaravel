@@ -14,22 +14,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creating Admin User
-        DB::table('users')->insert([
-            'fname' => 'First',
-            'lname' => 'Admin',
-            'username' => 'admin',
-            'email' => 'admin@news.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-        // Creating User
-        DB::table('users')->insert([
-            'fname' => 'First',
-            'lname' => 'User',
-            'username' => 'user',
-            'email' => 'user@news.com',
-            'password' => Hash::make('password'),
-        ]);
+        // // Creating Admin User
+        // DB::table('users')->insert([
+        //     'fname' => 'First',
+        //     'lname' => 'Admin',
+        //     'username' => 'admin',
+        //     'email' => 'admin@news.com',
+        //     'password' => Hash::make('password'),
+        //     'role' => 'admin',
+        // ]);
+        // // Creating User
+        // DB::table('users')->insert([
+        //     'fname' => 'First',
+        //     'lname' => 'User',
+        //     'username' => 'user',
+        //     'email' => 'user@news.com',
+        //     'password' => Hash::make('password'),
+        // ]);
     }
 }
