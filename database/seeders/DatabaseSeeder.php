@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enum\Super;
-use App\Models\LiveTV;
 use App\Models\User;
 use App\Models\Banner;
+use App\Models\LiveTV;
+use App\Models\Category;
 use App\Models\MetaData;
 use App\Models\Settings;
 use Illuminate\Database\Seeder;
@@ -71,6 +72,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         LiveTV::create([]);
+
+        Category::factory(15)->create();
 
     }
 }
