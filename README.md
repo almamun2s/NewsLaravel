@@ -2,7 +2,7 @@
 
 ## About This website
 
-This is portfolio website of me (Abdullah Almamun). I have made the website by using the most powerful PHP Framework - Laravel:
+This is a News paper website. It it made by using the most powerful PHP Framework -Laravel:
 
 
 
